@@ -1,6 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
+
+<script>
+(function(){
+  try{
+    var params = new URLSearchParams(window.location.search);
+    var qLang = params.get('lang');
+    var l = (qLang === 'en' || qLang === 'de') ? qLang : (localStorage.getItem('site-lang') || 'en');
+    document.documentElement.setAttribute('data-lang', l);
+    if(qLang === 'en' || qLang === 'de'){ localStorage.setItem('site-lang', qLang); }
+  }catch(e){}
+})();
+</script>
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fieldwork — Websites built around how your business actually works</title>
@@ -8,6 +22,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+
 <style>
   :root{
     --ink:#171511;
@@ -42,6 +58,10 @@
     text-decoration:none;font-size:14.5px;border-radius:2px;white-space:nowrap;
   }
   .menu-toggle{display:none;background:none;border:0;color:var(--paper);font-size:26px;cursor:pointer;}
+  .lang-switch{display:flex;gap:6px;font-size:13px;color:var(--paper-dim);margin-left:28px;}
+  .lang-switch a{text-decoration:none;color:var(--paper-dim);padding:2px 3px;}
+  .lang-switch a.active{color:var(--paper);border-bottom:1px solid var(--gold);}
+  .header-right{display:flex;align-items:center;}
 
   /* hero */
   .hero{padding:110px 40px 90px;max-width:1180px;margin:0 auto;}
@@ -149,21 +169,34 @@
     header{padding:22px 24px;}
     .step{grid-template-columns:40px 1fr;}
   }
+
+  .lang-block[data-block="de"]{display:none;}
+  html[data-lang="de"] .lang-block[data-block="de"]{display:block;}
+  html[data-lang="de"] .lang-block[data-block="en"]{display:none;}
+  .lang-switch button.lang-btn{background:none;border:0;font:inherit;cursor:pointer;padding:2px 3px;}
+  [data-lang-btn="en"]{color:inherit;opacity:0.65;}
+  [data-lang-btn="de"]{color:inherit;opacity:0.65;}
+  html:not([data-lang="de"]) [data-lang-btn="en"]{opacity:1;color:var(--paper);border-bottom:1px solid var(--gold);}
+  html[data-lang="de"] [data-lang-btn="de"]{opacity:1;color:var(--paper);border-bottom:1px solid var(--gold);}
 </style>
 </head>
 <body>
+<div class="lang-block" data-block="en">
 
 <header>
   <div class="brand">Fieldwork</div>
   <nav>
     <ul>
-      <li><a href="#work">Examples</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#en-work">Examples</a></li>
+      <li><a href="#en-process">Process</a></li>
+      <li><a href="#en-contact">Contact</a></li>
     </ul>
   </nav>
-  <a class="header-cta" href="#contact">Start a project</a>
-  <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+  <div class="header-right">
+    <a class="header-cta" href="#en-contact">Start a project</a>
+    <div class="lang-switch"><button type="button" class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button><button type="button" class="lang-btn" data-lang-btn="de" onclick="setLang('de')">DE</button></div>
+    <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+  </div>
 </header>
 
 <section class="hero">
@@ -182,13 +215,13 @@
   </div>
 </section>
 
-<section class="cases" id="work">
+<section class="cases" id="en-work">
 
   <div class="case">
     <div class="case-preview">
       <div class="browser-frame">
         <div class="browser-bar"><div class="browser-url">emberandoak.com</div></div>
-        <div class="preview-viewport"><iframe src="ember-oak.html" title="Ember and Oak preview" tabindex="-1"></iframe></div>
+        <div class="preview-viewport"><iframe src="ember-oak.html?lang=en" title="Ember and Oak preview" tabindex="-1"></iframe></div>
       </div>
     </div>
     <div class="case-copy">
@@ -197,7 +230,7 @@
       <div class="tagline">A neighborhood wine bar and kitchen</div>
       <p class="desc">Dark, editorial, and food-forward, with a nightly menu built to be updated in minutes and a reservation path that gets people to the phone or the door.</p>
       <div class="tags"><span>Restaurants</span><span>Reservations</span><span>Editorial layout</span></div>
-      <div class="case-links"><a href="ember-oak.html" target="_blank" rel="noopener">Open full site &#8599;</a></div>
+      <div class="case-links"><a href="ember-oak.html?lang=en" target="_blank" rel="noopener">Open full site &#8599;</a></div>
     </div>
   </div>
 
@@ -205,7 +238,7 @@
     <div class="case-preview">
       <div class="browser-frame">
         <div class="browser-bar"><div class="browser-url">marlowvoss.com</div></div>
-        <div class="preview-viewport"><iframe src="marlow-voss.html" title="Marlow and Voss preview" tabindex="-1"></iframe></div>
+        <div class="preview-viewport"><iframe src="marlow-voss.html?lang=en" title="Marlow and Voss preview" tabindex="-1"></iframe></div>
       </div>
     </div>
     <div class="case-copy">
@@ -214,7 +247,7 @@
       <div class="tagline">An architecture and interiors studio</div>
       <p class="desc">Structural, quiet, and built to let finished work speak first — a project index instead of a gallery, and real facts instead of adjectives.</p>
       <div class="tags"><span>Professional services</span><span>Portfolio</span><span>Lead capture</span></div>
-      <div class="case-links"><a href="marlow-voss.html" target="_blank" rel="noopener">Open full site &#8599;</a></div>
+      <div class="case-links"><a href="marlow-voss.html?lang=en" target="_blank" rel="noopener">Open full site &#8599;</a></div>
     </div>
   </div>
 
@@ -222,7 +255,7 @@
     <div class="case-preview">
       <div class="browser-frame">
         <div class="browser-bar"><div class="browser-url">northboundcoffee.com</div></div>
-        <div class="preview-viewport"><iframe src="northbound-coffee.html" title="Northbound Coffee Roasters preview" tabindex="-1"></iframe></div>
+        <div class="preview-viewport"><iframe src="northbound-coffee.html?lang=en" title="Northbound Coffee Roasters preview" tabindex="-1"></iframe></div>
       </div>
     </div>
     <div class="case-copy">
@@ -231,13 +264,13 @@
       <div class="tagline">A small-batch coffee roastery</div>
       <p class="desc">Bold and a little industrial, built around origin storytelling and a straightforward path from "curious" to "subscribed."</p>
       <div class="tags"><span>Retail &amp; product</span><span>Subscriptions</span><span>Brand-forward</span></div>
-      <div class="case-links"><a href="northbound-coffee.html" target="_blank" rel="noopener">Open full site &#8599;</a></div>
+      <div class="case-links"><a href="northbound-coffee.html?lang=en" target="_blank" rel="noopener">Open full site &#8599;</a></div>
     </div>
   </div>
 
 </section>
 
-<section class="process" id="process">
+<section class="process" id="en-process">
   <div class="process-inner">
     <h2>How a project actually goes</h2>
     <div class="steps">
@@ -273,7 +306,7 @@
   </div>
 </section>
 
-<section class="contact" id="contact">
+<section class="contact" id="en-contact">
   <h2>Tell us about your business and we'll tell you what we'd build.</h2>
   <div class="contact-detail">
     <div>Email</div>
@@ -289,6 +322,161 @@
   <div>&copy; 2026 Fieldwork Studio</div>
   <div>Halloway, Idaho</div>
 </footer>
+
+</div>
+<div class="lang-block" data-block="de">
+
+<header>
+  <div class="brand">Fieldwork</div>
+  <nav>
+    <ul>
+      <li><a href="#de-work">Beispiele</a></li>
+      <li><a href="#de-process">Ablauf</a></li>
+      <li><a href="#de-contact">Kontakt</a></li>
+    </ul>
+  </nav>
+  <div class="header-right">
+    <a class="header-cta" href="#de-contact">Projekt starten</a>
+    <div class="lang-switch"><button type="button" class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button><button type="button" class="lang-btn" data-lang-btn="de" onclick="setLang('de')">DE</button></div>
+    <button class="menu-toggle" aria-label="Menü">&#9776;</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-top">
+    <h1>Websites, die zeigen, wie Ihr Unternehmen wirklich arbeitet.</h1>
+    <div class="hero-side">Wir sind ein kleines Studio, das Websites für Restaurants, Studios, Läden und Kanzleien gestaltet und baut — für alle, die etwas wollen, das wie sie selbst aussieht, nicht wie eine Vorlage mit eingesetztem Logo.</div>
+  </div>
+  <div class="hero-rule"></div>
+</section>
+
+<section class="explainer">
+  <h2>Zu dieser Seite</h2>
+  <div>
+    <p>Statt Ihnen ein allgemeines Portfolio zu zeigen, haben wir drei vollständige Beispielseiten für drei unterschiedliche Arten von Unternehmen gebaut — ein Restaurant, ein Architekturbüro und eine Kaffeerösterei. Jede ist eine echte, funktionierende Website mit eigenem Layout, eigener Typografie, eigenen Farben und Inhalten, keine gemeinsame Vorlage mit ausgetauschten Farben.</p>
+    <p>Es geht darum, Ihnen etwas Konkretes zu geben, worauf Sie reagieren können. Wenn eine dieser Seiten schon nah an dem liegt, was für Ihr Unternehmen richtig wäre, können wir dort ansetzen. Wenn keine passt, ist das genauso hilfreich — dann wissen wir, was zu vermeiden ist.</p>
+  </div>
+</section>
+
+<section class="cases" id="de-work">
+
+  <div class="case">
+    <div class="case-preview">
+      <div class="browser-frame">
+        <div class="browser-bar"><div class="browser-url">emberandoak.com</div></div>
+        <div class="preview-viewport"><iframe src="ember-oak.html?lang=de" title="Vorschau Ember and Oak" tabindex="-1"></iframe></div>
+      </div>
+    </div>
+    <div class="case-copy">
+      <div class="index">Beispiel 01</div>
+      <h3>Ember &amp; Oak</h3>
+      <div class="tagline">Eine Weinbar und Küche im Stadtviertel</div>
+      <p class="desc">Dunkel, editoriell und ganz auf das Essen ausgerichtet, mit einer täglichen Speisekarte, die sich in Minuten aktualisieren lässt, und einem Reservierungsweg, der Menschen zum Telefon oder zur Tür führt.</p>
+      <div class="tags"><span>Gastronomie</span><span>Reservierung</span><span>Editorielles Layout</span></div>
+      <div class="case-links"><a href="ember-oak.html?lang=de" target="_blank" rel="noopener">Ganze Seite öffnen &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="case flip">
+    <div class="case-preview">
+      <div class="browser-frame">
+        <div class="browser-bar"><div class="browser-url">marlowvoss.com</div></div>
+        <div class="preview-viewport"><iframe src="marlow-voss.html?lang=de" title="Vorschau Marlow and Voss" tabindex="-1"></iframe></div>
+      </div>
+    </div>
+    <div class="case-copy">
+      <div class="index">Beispiel 02</div>
+      <h3>Marlow &amp; Voss</h3>
+      <div class="tagline">Ein Architektur- und Innenarchitekturbüro</div>
+      <p class="desc">Strukturiert, ruhig und darauf ausgelegt, fertige Arbeiten zuerst sprechen zu lassen — ein Projektverzeichnis statt einer Galerie, echte Fakten statt Adjektive.</p>
+      <div class="tags"><span>Dienstleistungen</span><span>Portfolio</span><span>Anfragen</span></div>
+      <div class="case-links"><a href="marlow-voss.html?lang=de" target="_blank" rel="noopener">Ganze Seite öffnen &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-preview">
+      <div class="browser-frame">
+        <div class="browser-bar"><div class="browser-url">northboundcoffee.com</div></div>
+        <div class="preview-viewport"><iframe src="northbound-coffee.html?lang=de" title="Vorschau Northbound Coffee Roasters" tabindex="-1"></iframe></div>
+      </div>
+    </div>
+    <div class="case-copy">
+      <div class="index">Beispiel 03</div>
+      <h3>Northbound Coffee Roasters</h3>
+      <div class="tagline">Eine kleine Kaffeerösterei</div>
+      <p class="desc">Kräftig und etwas industriell, aufgebaut um die Geschichte der Herkunft und einen klaren Weg von „neugierig“ zu „abonniert“.</p>
+      <div class="tags"><span>Handel &amp; Produkt</span><span>Abonnements</span><span>Markenstark</span></div>
+      <div class="case-links"><a href="northbound-coffee.html?lang=de" target="_blank" rel="noopener">Ganze Seite öffnen &#8599;</a></div>
+    </div>
+  </div>
+
+</section>
+
+<section class="process" id="de-process">
+  <div class="process-inner">
+    <h2>So läuft ein Projekt tatsächlich ab</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <div>
+          <h3>Ein kurzes Gespräch über Ihr Unternehmen</h3>
+          <p>Kein Fragebogen — ein echtes Gespräch darüber, was Sie tun, für wen, und was die Website tatsächlich leisten muss.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div>
+          <h3>Eine Gestaltungsrichtung, vollständig umgesetzt</h3>
+          <p>Wir schicken keine drei halbfertigen Entwürfe zur Auswahl. Wir setzen eine Richtung vollständig um, mit Ihren echten Inhalten.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div>
+          <h3>Eine gemeinsame Überarbeitungsrunde</h3>
+          <p>Wir gehen gemeinsam Seite für Seite durch und passen an, was nicht funktioniert, bevor irgendetwas online geht.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <div>
+          <h3>Start und ein Plan für die Pflege</h3>
+          <p>Sie erhalten eine Website, die Sie selbst pflegen können, plus eine unkomplizierte Vereinbarung, falls wir Änderungen lieber übernehmen sollen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="de-contact">
+  <h2>Erzählen Sie uns von Ihrem Unternehmen — wir sagen Ihnen, was wir bauen würden.</h2>
+  <div class="contact-detail">
+    <div>E-Mail</div>
+    <a href="mailto:hello@fieldworkstudio.com">hello@fieldworkstudio.com</a>
+  </div>
+  <div class="contact-detail" style="grid-column:1/-1;">
+    <div>Telefon</div>
+    <a href="tel:2085550171">(208) 555-0171</a>
+  </div>
+</section>
+
+<footer>
+  <div>&copy; 2026 Fieldwork Studio</div>
+  <div>Halloway, Idaho</div>
+</footer>
+
+</div>
+
+<script>
+  var pageTitles = { en: 'Fieldwork — Websites built around how your business actually works', de: 'Fieldwork — Websites, die zeigen, wie Ihr Unternehmen wirklich arbeitet' };
+  function setLang(l){
+    document.documentElement.setAttribute('data-lang', l);
+    document.title = pageTitles[l];
+    try{ localStorage.setItem('site-lang', l); }catch(e){}
+  }
+  document.title = pageTitles[document.documentElement.getAttribute('data-lang') || 'en'];
+</script>
 
 </body>
 </html>

@@ -1,6 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
+
+<script>
+(function(){
+  try{
+    var params = new URLSearchParams(window.location.search);
+    var qLang = params.get('lang');
+    var l = (qLang === 'en' || qLang === 'de') ? qLang : (localStorage.getItem('site-lang') || 'en');
+    document.documentElement.setAttribute('data-lang', l);
+    if(qLang === 'en' || qLang === 'de'){ localStorage.setItem('site-lang', qLang); }
+  }catch(e){}
+})();
+</script>
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Northbound Coffee Roasters</title>
@@ -8,6 +22,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+
 <style>
   :root{
     --brown:#2A1E17;
@@ -30,6 +46,10 @@
   nav ul{list-style:none;display:flex;gap:30px;margin:0;padding:0;font-size:15px;font-family:'Inter',sans-serif;}
   nav a:hover{color:var(--amber);}
   .menu-toggle{display:none;background:none;border:0;color:var(--cream);font-size:24px;}
+  .lang-switch{display:flex;gap:6px;font-size:13px;color:#c7b9a5;margin-left:24px;font-family:'Inter',sans-serif;}
+  .lang-switch a{text-decoration:none;color:#c7b9a5;padding:2px 3px;}
+  .lang-switch a.active{color:var(--cream);border-bottom:1px solid var(--amber);}
+  .header-right{display:flex;align-items:center;}
 
   .hero{
     background:var(--brown);color:var(--cream);
@@ -116,20 +136,33 @@
     .locations{grid-template-columns:1fr;padding:60px 24px;}
     .origins-head, .origins{padding-left:24px;padding-right:24px;}
   }
+
+  .lang-block[data-block="de"]{display:none;}
+  html[data-lang="de"] .lang-block[data-block="de"]{display:block;}
+  html[data-lang="de"] .lang-block[data-block="en"]{display:none;}
+  .lang-switch button.lang-btn{background:none;border:0;font:inherit;cursor:pointer;padding:2px 3px;}
+  [data-lang-btn="en"]{color:inherit;opacity:0.65;}
+  [data-lang-btn="de"]{color:inherit;opacity:0.65;}
+  html:not([data-lang="de"]) [data-lang-btn="en"]{opacity:1;color:var(--cream);border-bottom:1px solid var(--amber);}
+  html[data-lang="de"] [data-lang-btn="de"]{opacity:1;color:var(--cream);border-bottom:1px solid var(--amber);}
 </style>
 </head>
 <body>
+<div class="lang-block" data-block="en">
 
 <header>
   <div class="brand">Northbound</div>
   <nav>
     <ul>
-      <li><a href="#coffee">Coffee</a></li>
-      <li><a href="#process">Roasting</a></li>
-      <li><a href="#locations">Locations</a></li>
+      <li><a href="#en-coffee">Coffee</a></li>
+      <li><a href="#en-process">Roasting</a></li>
+      <li><a href="#en-locations">Locations</a></li>
     </ul>
   </nav>
-  <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+  <div class="header-right">
+    <div class="lang-switch"><button type="button" class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button><button type="button" class="lang-btn" data-lang-btn="de" onclick="setLang('de')">DE</button></div>
+    <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+  </div>
 </header>
 
 <section class="hero">
@@ -147,7 +180,7 @@
   </div>
 </section>
 
-<section class="intro" id="coffee">
+<section class="intro" id="en-coffee">
   <h2>Coffee, sourced on purpose</h2>
   <div>
     <p>We started Northbound out of a garage with a 1kg sample roaster and a spreadsheet of farms we wanted to work with directly. Ten years later the roaster is bigger, but the spreadsheet approach hasn't changed — we still buy from the same six farms, and we still visit each one at least once a year.</p>
@@ -182,7 +215,7 @@
   </div>
 </section>
 
-<section class="process" id="process">
+<section class="process" id="en-process">
   <div class="process-step">
     <div class="step-label">Sourcing</div>
     <h3>Direct trade, every farm</h3>
@@ -218,7 +251,7 @@
   </div>
 </section>
 
-<section class="locations" id="locations">
+<section class="locations" id="en-locations">
   <div class="location">
     <h3>Depot Row Roastery &amp; Cafe</h3>
     <p>118 Depot Row, Kittery</p>
@@ -238,6 +271,143 @@
     <div>Kittery, Maine</div>
   </div>
 </footer>
+
+</div>
+<div class="lang-block" data-block="de">
+
+<header>
+  <div class="brand">Northbound</div>
+  <nav>
+    <ul>
+      <li><a href="#de-coffee">Kaffee</a></li>
+      <li><a href="#de-process">Röstung</a></li>
+      <li><a href="#de-locations">Standorte</a></li>
+    </ul>
+  </nav>
+  <div class="header-right">
+    <div class="lang-switch"><button type="button" class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button><button type="button" class="lang-btn" data-lang-btn="de" onclick="setLang('de')">DE</button></div>
+    <button class="menu-toggle" aria-label="Menü">&#9776;</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Geröstet <span>nördlich</span> von einfach.</h1>
+    <p class="hero-copy">Kleinstmengen-Röstung in einem umgebauten Bahndepot. Wir kaufen direkt bei sechs Betrieben, rösten zweimal wöchentlich und versenden innerhalb von 48 Stunden nach der Trommel.</p>
+  </div>
+  <div class="hero-band">
+    <div class="wrap-inner">
+      <span>Gegründet 2016</span>
+      <span>Depot Row, Kittery</span>
+      <span>Sechs Herkunftsbetriebe</span>
+      <span>Auf Bestellung geröstet</span>
+    </div>
+  </div>
+</section>
+
+<section class="intro" id="de-coffee">
+  <h2>Kaffee, mit Absicht ausgewählt</h2>
+  <div>
+    <p>Wir haben Northbound in einer Garage gegründet, mit einem 1-kg-Probenröster und einer Tabelle der Betriebe, mit denen wir direkt arbeiten wollten. Zehn Jahre später ist der Röster größer, aber die Herangehensweise ist dieselbe geblieben — wir kaufen immer noch von denselben sechs Betrieben und besuchen jeden mindestens einmal im Jahr.</p>
+    <p>Jede Tüte nennt den Betrieb, die Höhenlage und die Aufbereitungsmethode. Erfüllt eine Partie nicht unseren Anspruch am Verkostungstisch, geht sie nicht unter unserem Namen hinaus — sie wird stattdessen roh weiterverkauft.</p>
+  </div>
+</section>
+
+<section class="origins">
+  <div class="origins-head">
+    <h2>Aktuelles Sortiment</h2>
+    <p>Sechs Herkünfte, im Wechsel geröstet. Abos werden mit dem versendet, was gerade frisch aus der Trommel kommt.</p>
+  </div>
+  <div class="origin-grid">
+    <div class="origin">
+      <div class="place">Huila, Kolumbien</div>
+      <div class="name">Finca Palmito</div>
+      <div class="notes">Rote Pflaume, brauner Zucker, weicher Zitrusabgang. Gewaschen, 1.750 m.</div>
+      <div class="price">340 g — 19 €</div>
+    </div>
+    <div class="origin">
+      <div class="place">Yirgacheffe, Äthiopien</div>
+      <div class="name">Konga-Kooperative</div>
+      <div class="notes">Jasmin, Bergamotte, leichter Schwarztee-Körper. Gewaschen, 2.000 m.</div>
+      <div class="price">340 g — 21 €</div>
+    </div>
+    <div class="origin">
+      <div class="place">Tarrazú, Costa Rica</div>
+      <div class="name">Finca Los Robles</div>
+      <div class="notes">Honig, Apfel, ausgewogene Säure. Honig-Aufbereitung, 1.600 m.</div>
+      <div class="price">340 g — 20 €</div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="de-process">
+  <div class="process-step">
+    <div class="step-label">Einkauf</div>
+    <h3>Direkthandel, bei jedem Betrieb</h3>
+    <p>Wir verhandeln den Preis mit jedem Betrieb direkt, über dem Marktpreis, und veröffentlichen, was wir bezahlen.</p>
+  </div>
+  <div class="process-step">
+    <div class="step-label">Verkostung</div>
+    <h3>Jede Partie, blind verkostet</h3>
+    <p>Rohkaffee-Muster werden blind gegen unseren eigenen Maßstab verkostet, bevor wir einen Einkauf zusagen.</p>
+  </div>
+  <div class="process-step">
+    <div class="step-label">Röstung</div>
+    <h3>Kleine Mengen, zweimal wöchentlich</h3>
+    <p>12-kg-Chargen auf einem Probat von 1962, mit einem eigenen Röstprofil je Herkunft statt einer Hausröstung.</p>
+  </div>
+  <div class="process-step">
+    <div class="step-label">Versand</div>
+    <h3>Innerhalb von 48 Stunden unterwegs</h3>
+    <p>Tüten werden am Tag der Röstung verschlossen und innerhalb von zwei Tagen versendet, niemals im Lager zwischengelagert.</p>
+  </div>
+</section>
+
+<section class="subscribe">
+  <div class="subscribe-inner">
+    <div>
+      <h2>Bevor er abgestanden ist</h2>
+      <p>Ein Abo, jederzeit anpassbar — wählen Sie Mahlgrad und Häufigkeit, wir übernehmen den Rest.</p>
+    </div>
+    <form class="subscribe-form" onsubmit="return false;">
+      <input type="email" placeholder="E-Mail-Adresse">
+      <button type="submit">Abo starten</button>
+    </form>
+  </div>
+</section>
+
+<section class="locations" id="de-locations">
+  <div class="location">
+    <h3>Röstwerk &amp; Café Depot Row</h3>
+    <p>Depot Row 118, Kittery</p>
+    <p>Mo–Fr 7–17 Uhr, Sa–So 8–16 Uhr</p>
+    <p>Führungen durch die Rösterei samstags um 10 Uhr, auf Anfrage.</p>
+  </div>
+  <div class="location">
+    <h3>Großhandel &amp; Gastronomiekunden</h3>
+    <p>Wir beliefern etwa dreißig Cafés und Restaurants in der Region.</p>
+    <p><a href="mailto:wholesale@northboundcoffee.com" style="border-bottom:1px solid var(--brown);">wholesale@northboundcoffee.com</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap-inner">
+    <div>&copy; 2026 Northbound Coffee Roasters</div>
+    <div>Kittery, Maine</div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  var pageTitles = { en: 'Northbound Coffee Roasters', de: 'Northbound Coffee Roasters' };
+  function setLang(l){
+    document.documentElement.setAttribute('data-lang', l);
+    document.title = pageTitles[l];
+    try{ localStorage.setItem('site-lang', l); }catch(e){}
+  }
+  document.title = pageTitles[document.documentElement.getAttribute('data-lang') || 'en'];
+</script>
 
 </body>
 </html>
