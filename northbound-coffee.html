@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northbound Coffee Roasters</title>
+<link rel="icon" type="image/svg+xml" href="favicon-northbound.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brown:#2A1E17;
+    --brown-deep:#1C1310;
+    --cream:#EFE6D8;
+    --amber:#D68A34;
+    --rust:#8B3A2B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--cream);color:var(--brown);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.01em;margin:0;}
+
+  header{
+    background:var(--brown);color:var(--cream);
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px 40px;
+  }
+  .brand{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;letter-spacing:0.02em;}
+  nav ul{list-style:none;display:flex;gap:30px;margin:0;padding:0;font-size:15px;font-family:'Inter',sans-serif;}
+  nav a:hover{color:var(--amber);}
+  .menu-toggle{display:none;background:none;border:0;color:var(--cream);font-size:24px;}
+
+  .hero{
+    background:var(--brown);color:var(--cream);
+    padding:70px 40px 0;position:relative;
+  }
+  .hero-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:end;padding-bottom:0;}
+  .hero h1{font-size:clamp(52px,8vw,110px);line-height:0.92;color:var(--cream);}
+  .hero h1 span{color:var(--amber);}
+  .hero-copy{font-size:16.5px;color:#d8cdbc;max-width:36ch;padding-bottom:24px;}
+  .hero-band{
+    background:var(--amber);color:var(--brown-deep);margin-top:44px;
+    display:flex;justify-content:space-between;padding:16px 40px;
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;
+    letter-spacing:0.04em;text-transform:uppercase;
+  }
+  .hero-band .wrap-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  .intro{
+    max-width:1160px;margin:0 auto;padding:90px 40px;
+    display:grid;grid-template-columns:0.6fr 1fr;gap:56px;
+  }
+  .intro h2{font-size:34px;}
+  .intro p{font-size:16px;color:#4a382b;max-width:52ch;}
+  .intro p + p{margin-top:14px;}
+
+  .origins{background:var(--brown-deep);color:var(--cream);padding:90px 40px;}
+  .origins-head{max-width:1160px;margin:0 auto 48px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;}
+  .origins-head h2{font-size:34px;}
+  .origins-head p{margin:0;color:#c7b9a5;max-width:36ch;font-size:15px;font-family:'Inter',sans-serif;}
+  .origin-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(239,230,216,0.14);}
+  .origin{background:var(--brown-deep);padding:32px 28px;}
+  .origin .place{font-family:'Barlow Condensed',sans-serif;font-size:22px;color:var(--amber);}
+  .origin .name{font-size:18px;margin:10px 0 12px;font-family:'Inter',sans-serif;text-transform:none;font-weight:600;}
+  .origin .notes{font-size:14px;color:#c7b9a5;}
+  .origin .price{margin-top:16px;font-size:14px;color:var(--cream);}
+
+  .process{
+    max-width:1160px;margin:0 auto;padding:90px 40px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:28px;
+  }
+  .process-step{border-top:3px solid var(--rust);padding-top:18px;}
+  .process-step .step-label{font-family:'Barlow Condensed',sans-serif;font-size:16px;color:var(--rust);}
+  .process-step h3{font-size:19px;margin:8px 0 8px;text-transform:none;}
+  .process-step p{font-size:14px;color:#4a382b;margin:0;}
+
+  .subscribe{
+    background:var(--amber);color:var(--brown-deep);padding:80px 40px;
+  }
+  .subscribe-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;align-items:center;}
+  .subscribe h2{font-size:36px;}
+  .subscribe p{font-family:'Inter',sans-serif;font-size:15.5px;max-width:40ch;margin-top:12px;}
+  .subscribe-form{display:flex;gap:0;}
+  .subscribe-form input{
+    flex:1;border:2px solid var(--brown-deep);border-right:none;padding:15px 16px;
+    font-family:'Inter',sans-serif;font-size:15px;background:var(--cream);
+  }
+  .subscribe-form button{
+    border:2px solid var(--brown-deep);background:var(--brown-deep);color:var(--cream);
+    padding:15px 24px;font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:15px;letter-spacing:0.03em;cursor:pointer;text-transform:uppercase;
+  }
+
+  .locations{max-width:1160px;margin:0 auto;padding:90px 40px;display:grid;grid-template-columns:repeat(2,1fr);gap:40px;}
+  .location h3{font-size:20px;text-transform:none;font-family:'Inter',sans-serif;font-weight:600;margin-bottom:8px;}
+  .location p{font-size:14.5px;color:#4a382b;margin:4px 0;}
+
+  footer{
+    background:var(--brown);color:#c7b9a5;padding:36px 40px;
+    display:flex;justify-content:space-between;font-size:13.5px;flex-wrap:wrap;gap:12px;
+  }
+  footer .wrap-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+
+  @media (max-width:880px){
+    nav ul{display:none;}
+    .menu-toggle{display:block;}
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-band{flex-direction:column;gap:10px;}
+    .intro{grid-template-columns:1fr;padding:60px 24px;}
+    .origin-grid{grid-template-columns:1fr;}
+    .process{grid-template-columns:1fr 1fr;padding:60px 24px;}
+    .subscribe-inner{grid-template-columns:1fr;}
+    .subscribe-form{flex-direction:column;}
+    .subscribe-form input, .subscribe-form button{border-right:2px solid var(--brown-deep);}
+    .locations{grid-template-columns:1fr;padding:60px 24px;}
+    .origins-head, .origins{padding-left:24px;padding-right:24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Northbound</div>
+  <nav>
+    <ul>
+      <li><a href="#coffee">Coffee</a></li>
+      <li><a href="#process">Roasting</a></li>
+      <li><a href="#locations">Locations</a></li>
+    </ul>
+  </nav>
+  <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Roasted <span>north</span> of easy.</h1>
+    <p class="hero-copy">Small-batch roasting out of a converted rail depot. We buy direct from six farms, roast twice a week, and ship within 48 hours of the drum.</p>
+  </div>
+  <div class="hero-band">
+    <div class="wrap-inner">
+      <span>Est. 2016</span>
+      <span>Depot Row, Kittery</span>
+      <span>Six origin farms</span>
+      <span>Roasted to order</span>
+    </div>
+  </div>
+</section>
+
+<section class="intro" id="coffee">
+  <h2>Coffee, sourced on purpose</h2>
+  <div>
+    <p>We started Northbound out of a garage with a 1kg sample roaster and a spreadsheet of farms we wanted to work with directly. Ten years later the roaster is bigger, but the spreadsheet approach hasn't changed — we still buy from the same six farms, and we still visit each one at least once a year.</p>
+    <p>Every bag tells you the farm, the elevation, and the processing method. If a lot doesn't meet the bar we set on the cupping table, it doesn't go out under our name — it's sold off green instead.</p>
+  </div>
+</section>
+
+<section class="origins">
+  <div class="origins-head">
+    <h2>Current lineup</h2>
+    <p>Six origins, roasted in rotation. Subscriptions ship from whatever's freshest off the drum.</p>
+  </div>
+  <div class="origin-grid">
+    <div class="origin">
+      <div class="place">Huila, Colombia</div>
+      <div class="name">Finca Palmito</div>
+      <div class="notes">Red plum, brown sugar, soft citrus finish. Washed, 1,750m.</div>
+      <div class="price">12oz — $19</div>
+    </div>
+    <div class="origin">
+      <div class="place">Yirgacheffe, Ethiopia</div>
+      <div class="name">Konga Cooperative</div>
+      <div class="notes">Jasmine, bergamot, light black tea body. Washed, 2,000m.</div>
+      <div class="price">12oz — $21</div>
+    </div>
+    <div class="origin">
+      <div class="place">Tarrazú, Costa Rica</div>
+      <div class="name">Finca Los Robles</div>
+      <div class="notes">Honey, apple, balanced acidity. Honey-processed, 1,600m.</div>
+      <div class="price">12oz — $20</div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="process-step">
+    <div class="step-label">Sourcing</div>
+    <h3>Direct trade, every farm</h3>
+    <p>We negotiate price with each farm directly, above commodity rate, and publish what we pay.</p>
+  </div>
+  <div class="process-step">
+    <div class="step-label">Cupping</div>
+    <h3>Every lot, tasted blind</h3>
+    <p>Green samples are cupped blind against our own bar before we commit to a purchase.</p>
+  </div>
+  <div class="process-step">
+    <div class="step-label">Roasting</div>
+    <h3>Small batches, twice weekly</h3>
+    <p>12kg batches on a 1962 Probat, profiled per origin rather than one house curve.</p>
+  </div>
+  <div class="process-step">
+    <div class="step-label">Shipping</div>
+    <h3>Out within 48 hours</h3>
+    <p>Bags are sealed the day they're roasted and shipped within two days, never held in a warehouse.</p>
+  </div>
+</section>
+
+<section class="subscribe">
+  <div class="subscribe-inner">
+    <div>
+      <h2>Get it before it's stale</h2>
+      <p>A standing order, adjustable any time — pick your grind, your frequency, and let us handle the rest.</p>
+    </div>
+    <form class="subscribe-form" onsubmit="return false;">
+      <input type="email" placeholder="Email address">
+      <button type="submit">Start subscription</button>
+    </form>
+  </div>
+</section>
+
+<section class="locations" id="locations">
+  <div class="location">
+    <h3>Depot Row Roastery &amp; Cafe</h3>
+    <p>118 Depot Row, Kittery</p>
+    <p>Mon–Fri 7am–5pm, Sat–Sun 8am–4pm</p>
+    <p>Tours of the roastery run Saturdays at 10am, by request.</p>
+  </div>
+  <div class="location">
+    <h3>Wholesale &amp; cafe accounts</h3>
+    <p>We supply about thirty cafes and restaurants across the region.</p>
+    <p><a href="mailto:wholesale@northboundcoffee.com" style="border-bottom:1px solid var(--brown);">wholesale@northboundcoffee.com</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap-inner">
+    <div>&copy; 2026 Northbound Coffee Roasters</div>
+    <div>Kittery, Maine</div>
+  </div>
+</footer>
+
+</body>
+</html>

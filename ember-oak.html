@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ember &amp; Oak — Wine Bar &amp; Kitchen, Fernbrook</title>
+<link rel="icon" type="image/svg+xml" href="favicon-ember-oak.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green: #1F2E22;
+    --green-deep: #16201A;
+    --cream: #F4EFE4;
+    --cream-dim: #E8E0CE;
+    --brass: #C7A252;
+    --ink: #23201B;
+    --line: rgba(244,239,228,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+  }
+  a{color:inherit;}
+  h1,h2,h3{
+    font-family:'Libre Caslon Display','Cormorant Garamond',serif;
+    font-weight:400;
+    margin:0;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  /* header */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:var(--green);
+    color:var(--cream);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 32px;max-width:1120px;margin:0 auto;
+  }
+  .brand{
+    font-family:'Libre Caslon Display',serif;
+    font-size:22px;letter-spacing:0.02em;
+  }
+  .nav ul{list-style:none;display:flex;gap:32px;margin:0;padding:0;font-size:14.5px;}
+  .nav a{text-decoration:none;opacity:0.88;}
+  .nav a:hover{opacity:1;}
+  .nav-cta{
+    border:1px solid var(--brass);color:var(--brass);
+    padding:8px 18px;border-radius:2px;font-size:14px;text-decoration:none;
+    white-space:nowrap;
+  }
+  .menu-toggle{display:none;background:none;border:0;color:var(--cream);font-size:26px;cursor:pointer;}
+
+  /* hero */
+  .hero{
+    background:var(--green);color:var(--cream);
+    padding:96px 32px 120px;position:relative;overflow:hidden;
+  }
+  .hero-grain{
+    position:absolute;inset:0;opacity:0.05;
+    background-image:radial-gradient(circle at 20% 30%, var(--brass) 0, transparent 40%),
+                      radial-gradient(circle at 80% 70%, var(--brass) 0, transparent 45%);
+  }
+  .hero-inner{max-width:1120px;margin:0 auto;position:relative;}
+  .kicker{
+    color:var(--brass);font-size:15px;font-style:italic;
+    font-family:'Cormorant Garamond',serif;margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(40px,6.4vw,74px);
+    max-width:15ch;line-height:1.06;
+  }
+  .hero p{
+    max-width:44ch;margin-top:26px;font-size:18px;color:var(--cream-dim);
+  }
+  .hero-actions{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:14px 28px;text-decoration:none;
+    font-size:14.5px;letter-spacing:0.02em;border-radius:2px;
+  }
+  .btn-brass{background:var(--brass);color:var(--green-deep);font-weight:600;}
+  .btn-outline{border:1px solid rgba(244,239,228,0.5);color:var(--cream);}
+
+  .vine{
+    position:absolute;right:-40px;top:20px;width:280px;opacity:0.9;
+  }
+
+  /* intro / philosophy */
+  .philosophy{
+    padding:100px 32px;display:grid;grid-template-columns:0.9fr 1.4fr;gap:64px;
+  }
+  .philosophy h2{font-size:34px;line-height:1.2;}
+  .philosophy .lede{font-size:19px;line-height:1.7;color:#3a352c;}
+  .philosophy .lede + p{margin-top:16px;color:#5a5346;font-size:16px;}
+
+  /* menu */
+  .menu-section{
+    background:var(--green-deep);color:var(--cream);padding:100px 32px;
+  }
+  .menu-head{max-width:1120px;margin:0 auto 56px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+  .menu-head h2{font-size:38px;}
+  .menu-head p{color:var(--cream-dim);max-width:34ch;margin:0;}
+  .menu-grid{
+    max-width:1120px;margin:0 auto;
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;
+  }
+  .menu-group h3{
+    font-size:14px;text-transform:none;letter-spacing:0.04em;
+    color:var(--brass);font-family:'Inter',sans-serif;font-weight:600;
+    border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:22px;
+  }
+  .dish{display:flex;justify-content:space-between;gap:18px;margin-bottom:20px;}
+  .dish-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;}
+  .dish-desc{font-size:14px;color:var(--cream-dim);margin-top:4px;max-width:38ch;}
+  .dish-price{font-size:15px;color:var(--brass);white-space:nowrap;padding-top:2px;}
+
+  /* gallery strip - abstract color blocks instead of stock photography */
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);}
+  .strip div{height:200px;}
+  .swatch-1{background:linear-gradient(135deg,#2c4130,#1a2620);}
+  .swatch-2{background:linear-gradient(135deg,#C7A252,#8f7534);}
+  .swatch-3{background:linear-gradient(135deg,#4b3a2a,#241b12);}
+  .swatch-4{background:linear-gradient(135deg,#E8E0CE,#c9bd9d);}
+
+  /* visit / hours */
+  .visit{
+    padding:100px 32px;display:grid;grid-template-columns:1fr 1fr;gap:64px;
+  }
+  .visit h2{font-size:32px;margin-bottom:24px;}
+  .hours-row{display:flex;justify-content:space-between;max-width:340px;padding:10px 0;border-bottom:1px solid rgba(35,32,27,0.12);font-size:15px;}
+  .addr{margin-top:32px;font-size:15px;color:#5a5346;line-height:1.8;}
+  .map-block{
+    background:var(--cream-dim);border:1px solid rgba(35,32,27,0.12);
+    height:100%;min-height:280px;position:relative;border-radius:2px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .map-block svg{width:70%;opacity:0.5;}
+
+  footer{
+    background:var(--green);color:var(--cream-dim);padding:56px 32px 40px;
+    font-size:14px;
+  }
+  .footer-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-inner .brand{color:var(--cream);}
+
+  @media (max-width:840px){
+    .nav ul, .nav-cta{display:none;}
+    .menu-toggle{display:block;}
+    .philosophy, .visit{grid-template-columns:1fr;gap:32px;}
+    .menu-grid{grid-template-columns:1fr;}
+    .strip{grid-template-columns:repeat(2,1fr);}
+    .hero{padding:72px 24px 88px;}
+    .vine{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="brand">Ember &amp; Oak</div>
+    <ul>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#visit">Hours &amp; location</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a class="nav-cta" href="#visit">Reserve a table</a>
+    <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-inner">
+    <div class="kicker">A wine bar and kitchen on Aldergate Row</div>
+    <h1>Good wine, cooked-down food, and a table that isn't rushing you.</h1>
+    <p>Ember &amp; Oak seats thirty-two. We change the board with the season and keep a running list of small producers worth knowing. No tasting menu, no dress code — just a kitchen that cares and a cellar we're proud of.</p>
+    <div class="hero-actions">
+      <a class="btn btn-brass" href="#visit">Reserve a table</a>
+      <a class="btn btn-outline" href="#menu">See tonight's menu</a>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy" id="about">
+  <h2>We cook like the season decides, not the calendar.</h2>
+  <div>
+    <p class="lede">Ember &amp; Oak opened in 2019 in a converted hardware store on Aldergate Row. The oven is wood-fired, the wine list is short on purpose, and most of what lands on the board came from a grower within eighty miles.</p>
+    <p>Chef Marion Duclos trained in Lyon before coming home to run a kitchen her own way: fewer plates, more attention to each one. The wine list is curated with the same restraint — thirty-odd bottles, rotating constantly, chosen by people who've actually visited the vineyards.</p>
+  </div>
+</section>
+
+<section class="menu-section" id="menu">
+  <div class="menu-head">
+    <h2>Tonight's board</h2>
+    <p>Updated daily. Ask your server about the reserve list — it doesn't make it onto paper.</p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-group">
+      <h3>To start</h3>
+      <div class="dish">
+        <div>
+          <div class="dish-name">Charred leeks, hazelnut, brown butter</div>
+          <div class="dish-desc">Whole leeks over the wood fire, finished at the pass</div>
+        </div>
+        <div class="dish-price">$14</div>
+      </div>
+      <div class="dish">
+        <div>
+          <div class="dish-name">Beef tartare, rye crisp, egg yolk</div>
+          <div class="dish-desc">Hand-cut, dressed with capers and shallot</div>
+        </div>
+        <div class="dish-price">$18</div>
+      </div>
+      <div class="dish">
+        <div>
+          <div class="dish-name">Burrata, roasted grapes, thyme oil</div>
+        </div>
+        <div class="dish-price">$16</div>
+      </div>
+    </div>
+    <div class="menu-group">
+      <h3>Mains</h3>
+      <div class="dish">
+        <div>
+          <div class="dish-name">Half chicken, jus, market greens</div>
+          <div class="dish-desc">Brined 24 hours, roasted over oak</div>
+        </div>
+        <div class="dish-price">$29</div>
+      </div>
+      <div class="dish">
+        <div>
+          <div class="dish-name">Hanger steak, bordelaise, potato gratin</div>
+        </div>
+        <div class="dish-price">$36</div>
+      </div>
+      <div class="dish">
+        <div>
+          <div class="dish-name">Wild mushroom risotto, aged parmesan</div>
+          <div class="dish-desc">Vegetarian; ask about a vegan version</div>
+        </div>
+        <div class="dish-price">$24</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip" aria-hidden="true">
+  <div class="swatch-1"></div>
+  <div class="swatch-2"></div>
+  <div class="swatch-3"></div>
+  <div class="swatch-4"></div>
+</div>
+
+<section class="visit" id="visit">
+  <div>
+    <h2>Hours &amp; reservations</h2>
+    <div class="hours-row"><span>Tuesday – Thursday</span><span>5:30pm – 10pm</span></div>
+    <div class="hours-row"><span>Friday – Saturday</span><span>5:30pm – 11pm</span></div>
+    <div class="hours-row"><span>Sunday</span><span>5pm – 9pm</span></div>
+    <div class="hours-row"><span>Monday</span><span>Closed</span></div>
+    <div class="addr">
+      142 Aldergate Row<br>
+      Fernbrook<br>
+      (208) 555-0148<br>
+      Walk-ins welcome at the bar. Tables of 5 or more, call ahead.
+    </div>
+    <div class="hero-actions" style="margin-top:32px;">
+      <a class="btn" style="background:var(--green);color:var(--cream);" href="tel:2085550148">Call to reserve</a>
+    </div>
+  </div>
+  <div class="map-block">
+    <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="4" width="192" height="132" fill="none" stroke="#23201B" stroke-width="1.5"/>
+      <line x1="4" y1="70" x2="196" y2="70" stroke="#23201B" stroke-width="1.5"/>
+      <line x1="100" y1="4" x2="100" y2="136" stroke="#23201B" stroke-width="1"/>
+      <circle cx="100" cy="70" r="6" fill="#C7A252"/>
+      <text x="108" y="66" font-family="Inter" font-size="9" fill="#23201B">Aldergate Row</text>
+    </svg>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="brand">Ember &amp; Oak</div>
+    <div>&copy; 2026 Ember &amp; Oak Wine Bar &amp; Kitchen. Fernbrook.</div>
+  </div>
+</footer>
+
+</body>
+</html>

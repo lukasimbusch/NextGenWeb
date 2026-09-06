@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fieldwork — Websites built around how your business actually works</title>
+<link rel="icon" type="image/svg+xml" href="favicon-studio.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171511;
+    --ink-soft:#211E19;
+    --paper:#F3EEE3;
+    --paper-dim:#B9B2A2;
+    --gold:#BD9B3E;
+    --rust:#93432A;
+    --line:rgba(243,238,227,0.14);
+    --line-dark:rgba(23,21,17,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--ink);color:var(--paper);
+    font-family:'Work Sans',sans-serif;font-size:17px;line-height:1.65;
+  }
+  a{color:inherit;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;margin:0;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:30px 40px;border-bottom:1px solid var(--line);
+  }
+  .brand{font-family:'Fraunces',serif;font-size:21px;letter-spacing:0.01em;}
+  nav ul{list-style:none;display:flex;gap:34px;margin:0;padding:0;font-size:15px;}
+  nav a{text-decoration:none;color:var(--paper-dim);}
+  nav a:hover{color:var(--paper);}
+  .header-cta{
+    border:1px solid var(--gold);color:var(--gold);padding:9px 20px;
+    text-decoration:none;font-size:14.5px;border-radius:2px;white-space:nowrap;
+  }
+  .menu-toggle{display:none;background:none;border:0;color:var(--paper);font-size:26px;cursor:pointer;}
+
+  /* hero */
+  .hero{padding:110px 40px 90px;max-width:1180px;margin:0 auto;}
+  .hero-top{display:grid;grid-template-columns:1.3fr 0.9fr;gap:60px;align-items:end;}
+  .hero h1{font-size:clamp(38px,5.4vw,62px);line-height:1.12;max-width:16ch;}
+  .hero-side{font-size:16px;color:var(--paper-dim);max-width:36ch;padding-bottom:6px;}
+  .hero-rule{height:1px;background:var(--line);margin:56px 0 0;}
+
+  /* how this page works */
+  .explainer{
+    padding:70px 40px 30px;max-width:1180px;margin:0 auto;
+    display:grid;grid-template-columns:0.7fr 1.3fr;gap:56px;
+  }
+  .explainer h2{font-size:15px;font-family:'Work Sans',sans-serif;font-weight:600;color:var(--gold);}
+  .explainer p{color:var(--paper-dim);font-size:16px;max-width:56ch;}
+  .explainer p + p{margin-top:14px;}
+
+  /* case studies */
+  .cases{padding:60px 40px 40px;max-width:1180px;margin:0 auto;}
+  .case{
+    display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center;
+    padding:70px 0;border-top:1px solid var(--line);
+  }
+  .case:last-child{border-bottom:1px solid var(--line);}
+  .case.flip{grid-template-columns:1.15fr 1fr;}
+  .case.flip .case-preview{order:2;}
+  .case.flip .case-copy{order:1;}
+
+  .case-copy .index{font-family:'Fraunces',serif;font-size:15px;color:var(--gold);font-style:italic;margin-bottom:14px;}
+  .case-copy h3{font-size:30px;margin-bottom:10px;}
+  .case-copy .tagline{color:var(--paper-dim);font-size:15px;margin-bottom:18px;}
+  .case-copy p.desc{color:#d9d3c4;font-size:15.5px;max-width:44ch;}
+  .tags{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+  .tags span{
+    font-size:12.5px;padding:5px 11px;border:1px solid var(--line);color:var(--paper-dim);
+  }
+  .case-links{margin-top:24px;display:flex;gap:20px;align-items:center;}
+  .case-links a{
+    color:var(--gold);text-decoration:none;font-size:14.5px;border-bottom:1px solid rgba(189,155,62,0.4);
+    padding-bottom:2px;
+  }
+  .case-links a:hover{border-color:var(--gold);}
+
+  .browser-frame{
+    background:var(--ink-soft);border:1px solid var(--line);border-radius:6px;
+    overflow:hidden;
+  }
+  .browser-bar{
+    display:flex;align-items:center;gap:10px;padding:10px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .browser-url{
+    background:rgba(243,238,227,0.06);color:var(--paper-dim);
+    font-size:12.5px;padding:5px 12px;border-radius:3px;flex:1;
+    font-family:'Work Sans',sans-serif;
+  }
+  .preview-viewport{
+    position:relative;width:100%;
+    aspect-ratio:16/10.5;overflow:hidden;background:#fff;
+  }
+  .preview-viewport iframe{
+    position:absolute;top:0;left:0;border:0;
+    width:250%;height:250%;
+    transform:scale(0.4);transform-origin:top left;
+    pointer-events:none;
+  }
+
+  /* process */
+  .process{background:var(--ink-soft);padding:100px 40px;}
+  .process-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:0.8fr 1.2fr;gap:56px;}
+  .process h2{font-size:32px;max-width:12ch;}
+  .steps{display:flex;flex-direction:column;}
+  .step{display:grid;grid-template-columns:60px 1fr;gap:20px;padding:24px 0;border-top:1px solid var(--line);}
+  .step:last-child{border-bottom:1px solid var(--line);}
+  .step .n{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:16px;}
+  .step h3{font-size:18px;margin-bottom:6px;}
+  .step p{margin:0;color:var(--paper-dim);font-size:14.5px;max-width:50ch;}
+
+  /* contact */
+  .contact{
+    padding:120px 40px;max-width:1180px;margin:0 auto;
+    display:grid;grid-template-columns:1.2fr 0.8fr;gap:56px;align-items:start;
+  }
+  .contact h2{font-size:clamp(30px,4vw,44px);max-width:14ch;}
+  .contact-detail{border-top:1px solid var(--line);padding-top:24px;}
+  .contact-detail div{font-size:15px;color:var(--paper-dim);margin-bottom:10px;}
+  .contact-detail a{color:var(--paper);text-decoration:none;border-bottom:1px solid var(--line);}
+
+  footer{
+    border-top:1px solid var(--line);padding:32px 40px;
+    display:flex;justify-content:space-between;font-size:13.5px;color:var(--paper-dim);flex-wrap:wrap;gap:12px;
+    max-width:1180px;margin:0 auto;
+  }
+
+  @media (max-width:900px){
+    nav ul, .header-cta{display:none;}
+    .menu-toggle{display:block;}
+    .hero-top, .explainer, .process-inner, .contact{grid-template-columns:1fr;gap:28px;}
+    .case, .case.flip{grid-template-columns:1fr;}
+    .case.flip .case-preview, .case.flip .case-copy{order:initial;}
+    .hero{padding:80px 24px 60px;}
+    .explainer{padding:50px 24px 20px;}
+    .cases{padding:40px 24px 20px;}
+    .process, .contact{padding:70px 24px;}
+    header{padding:22px 24px;}
+    .step{grid-template-columns:40px 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Fieldwork</div>
+  <nav>
+    <ul>
+      <li><a href="#work">Examples</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a class="header-cta" href="#contact">Start a project</a>
+  <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+</header>
+
+<section class="hero">
+  <div class="hero-top">
+    <h1>Websites built around how your business actually works.</h1>
+    <div class="hero-side">We're a small studio that designs and builds sites for restaurants, studios, shops, and firms who want something that looks like them — not like a template with their logo dropped in.</div>
+  </div>
+  <div class="hero-rule"></div>
+</section>
+
+<section class="explainer">
+  <h2>About this page</h2>
+  <div>
+    <p>Rather than show you a generic portfolio, we built three complete example sites for three different kinds of business — a restaurant, an architecture studio, and a coffee roastery. Each one is a real, working website with its own layout, type, color, and content, not a shared template with the colors swapped.</p>
+    <p>The point is to give you something concrete to react to. If one of these feels close to right for your business, we can start there. If none of them do, that's useful too — it tells us what to avoid.</p>
+  </div>
+</section>
+
+<section class="cases" id="work">
+
+  <div class="case">
+    <div class="case-preview">
+      <div class="browser-frame">
+        <div class="browser-bar"><div class="browser-url">emberandoak.com</div></div>
+        <div class="preview-viewport"><iframe src="ember-oak.html" title="Ember and Oak preview" tabindex="-1"></iframe></div>
+      </div>
+    </div>
+    <div class="case-copy">
+      <div class="index">Example 01</div>
+      <h3>Ember &amp; Oak</h3>
+      <div class="tagline">A neighborhood wine bar and kitchen</div>
+      <p class="desc">Dark, editorial, and food-forward, with a nightly menu built to be updated in minutes and a reservation path that gets people to the phone or the door.</p>
+      <div class="tags"><span>Restaurants</span><span>Reservations</span><span>Editorial layout</span></div>
+      <div class="case-links"><a href="ember-oak.html" target="_blank" rel="noopener">Open full site &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="case flip">
+    <div class="case-preview">
+      <div class="browser-frame">
+        <div class="browser-bar"><div class="browser-url">marlowvoss.com</div></div>
+        <div class="preview-viewport"><iframe src="marlow-voss.html" title="Marlow and Voss preview" tabindex="-1"></iframe></div>
+      </div>
+    </div>
+    <div class="case-copy">
+      <div class="index">Example 02</div>
+      <h3>Marlow &amp; Voss</h3>
+      <div class="tagline">An architecture and interiors studio</div>
+      <p class="desc">Structural, quiet, and built to let finished work speak first — a project index instead of a gallery, and real facts instead of adjectives.</p>
+      <div class="tags"><span>Professional services</span><span>Portfolio</span><span>Lead capture</span></div>
+      <div class="case-links"><a href="marlow-voss.html" target="_blank" rel="noopener">Open full site &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-preview">
+      <div class="browser-frame">
+        <div class="browser-bar"><div class="browser-url">northboundcoffee.com</div></div>
+        <div class="preview-viewport"><iframe src="northbound-coffee.html" title="Northbound Coffee Roasters preview" tabindex="-1"></iframe></div>
+      </div>
+    </div>
+    <div class="case-copy">
+      <div class="index">Example 03</div>
+      <h3>Northbound Coffee Roasters</h3>
+      <div class="tagline">A small-batch coffee roastery</div>
+      <p class="desc">Bold and a little industrial, built around origin storytelling and a straightforward path from "curious" to "subscribed."</p>
+      <div class="tags"><span>Retail &amp; product</span><span>Subscriptions</span><span>Brand-forward</span></div>
+      <div class="case-links"><a href="northbound-coffee.html" target="_blank" rel="noopener">Open full site &#8599;</a></div>
+    </div>
+  </div>
+
+</section>
+
+<section class="process" id="process">
+  <div class="process-inner">
+    <h2>How a project actually goes</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <div>
+          <h3>A short conversation about your business</h3>
+          <p>Not a questionnaire — a real conversation about what you do, who it's for, and what the site actually needs to accomplish.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div>
+          <h3>One design direction, built in full</h3>
+          <p>We don't send three half-finished mockups to choose between. We build one direction all the way through, using your real content.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div>
+          <h3>A round of revisions, together</h3>
+          <p>We sit down and go through it page by page, and adjust what isn't working before anything goes live.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <div>
+          <h3>Launch, and a plan for upkeep</h3>
+          <p>We hand off a site you can actually update yourself, plus a straightforward arrangement if you'd rather we handle changes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Tell us about your business and we'll tell you what we'd build.</h2>
+  <div class="contact-detail">
+    <div>Email</div>
+    <a href="mailto:hello@fieldworkstudio.com">hello@fieldworkstudio.com</a>
+  </div>
+  <div class="contact-detail" style="grid-column:1/-1;">
+    <div>Phone</div>
+    <a href="tel:2085550171">(208) 555-0171</a>
+  </div>
+</section>
+
+<footer>
+  <div>&copy; 2026 Fieldwork Studio</div>
+  <div>Halloway, Idaho</div>
+</footer>
+
+</body>
+</html>
