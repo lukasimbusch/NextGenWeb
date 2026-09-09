@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
 <head>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ember &amp; Oak — Wine Bar &amp; Kitchen, Fernbrook</title>
+<link rel="icon" type="image/svg+xml" href="favicon-ember-oak.svg">
 <script>
 (function(){
   try{
@@ -13,470 +16,506 @@
   }catch(e){}
 })();
 </script>
-
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ember &amp; Oak — Wine Bar &amp; Kitchen, Fernbrook</title>
-<link rel="icon" type="image/svg+xml" href="favicon-ember-oak.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --green: #1F2E22;
-    --green-deep: #16201A;
-    --cream: #F4EFE4;
-    --cream-dim: #E8E0CE;
-    --brass: #C7A252;
-    --ink: #23201B;
-    --line: rgba(244,239,228,0.16);
+    --bg:#F7F1E4;
+    --surface:#FFFFFF;
+    --surface-2:#FBF5E7;
+    --green:#1F2E22;
+    --green-deep:#16201A;
+    --ink:#23201B;
+    --muted:#7A7160;
+    --brass:#C7A252;
+    --wine:#6E2B33;
+    --olive:#6B6B3A;
+    --border:rgba(35,32,27,0.09);
+    --shadow-sm:0 2px 10px rgba(35,32,27,0.06);
+    --shadow-md:0 16px 40px rgba(35,32,27,0.12);
+    --shadow-lg:0 24px 60px rgba(35,32,27,0.2);
   }
-  *{box-sizing:border-box;}
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--cream);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    font-size:17px;
-    line-height:1.6;
-  }
-  a{color:inherit;}
-  h1,h2,h3{
-    font-family:'Libre Caslon Display','Cormorant Garamond',serif;
-    font-weight:400;
-    margin:0;
-  }
-  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;margin:0;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;}
+  .container{max-width:1160px;margin:0 auto;padding:0 24px;}
 
-  /* header */
-  header{
-    position:sticky;top:0;z-index:20;
-    background:var(--green);
-    color:var(--cream);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:20px 32px;max-width:1120px;margin:0 auto;
-  }
-  .brand{
-    font-family:'Libre Caslon Display',serif;
-    font-size:22px;letter-spacing:0.02em;
-  }
-  .nav ul{list-style:none;display:flex;gap:32px;margin:0;padding:0;font-size:14.5px;}
-  .nav a{text-decoration:none;opacity:0.88;}
-  .nav a:hover{opacity:1;}
-  .nav-cta{
-    border:1px solid var(--brass);color:var(--brass);
-    padding:8px 18px;border-radius:2px;font-size:14px;text-decoration:none;
-    white-space:nowrap;
-  }
-  .menu-toggle{display:none;background:none;border:0;color:var(--cream);font-size:26px;cursor:pointer;}
-  .lang-switch{display:flex;gap:6px;font-size:13px;color:var(--cream-dim);margin-left:24px;}
-  .lang-switch a{text-decoration:none;color:var(--cream-dim);padding:2px 3px;}
-  .lang-switch a.active{color:var(--cream);border-bottom:1px solid var(--brass);}
-  .header-right{display:flex;align-items:center;}
-
-  /* hero */
-  .hero{
-    background:var(--green);color:var(--cream);
-    padding:96px 32px 120px;position:relative;overflow:hidden;
-  }
-  .hero-grain{
-    position:absolute;inset:0;opacity:0.05;
-    background-image:radial-gradient(circle at 20% 30%, var(--brass) 0, transparent 40%),
-                      radial-gradient(circle at 80% 70%, var(--brass) 0, transparent 45%);
-  }
-  .hero-inner{max-width:1120px;margin:0 auto;position:relative;}
-  .kicker{
-    color:var(--brass);font-size:15px;font-style:italic;
-    font-family:'Cormorant Garamond',serif;margin-bottom:18px;
-  }
-  .hero h1{
-    font-size:clamp(40px,6.4vw,74px);
-    max-width:15ch;line-height:1.06;
-  }
-  .hero p{
-    max-width:44ch;margin-top:26px;font-size:18px;color:var(--cream-dim);
-  }
-  .hero-actions{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;}
-  .btn{
-    display:inline-block;padding:14px 28px;text-decoration:none;
-    font-size:14.5px;letter-spacing:0.02em;border-radius:2px;
-  }
-  .btn-brass{background:var(--brass);color:var(--green-deep);font-weight:600;}
-  .btn-outline{border:1px solid rgba(244,239,228,0.5);color:var(--cream);}
-
-  .vine{
-    position:absolute;right:-40px;top:20px;width:280px;opacity:0.9;
+  @media (prefers-reduced-motion: reduce){
+    .reveal, .hero-anim{opacity:1 !important; transform:none !important; animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto !important;}
   }
 
-  /* intro / philosophy */
-  .philosophy{
-    padding:100px 32px;display:grid;grid-template-columns:0.9fr 1.4fr;gap:64px;
+  .navbar-wrap{position:sticky; top:0; z-index:70; padding:18px 20px 0; pointer-events:none;}
+  .navbar{
+    pointer-events:auto; max-width:1080px; margin:0 auto; background:rgba(255,255,255,0.88);
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    border:1px solid var(--border); border-radius:999px; padding:8px 10px 8px 24px;
+    display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-sm);
+    transition:box-shadow .3s ease, border-radius .3s ease; position:relative;
   }
-  .philosophy h2{font-size:34px;line-height:1.2;}
-  .philosophy .lede{font-size:19px;line-height:1.7;color:#3a352c;}
-  .philosophy .lede + p{margin-top:16px;color:#5a5346;font-size:16px;}
+  .navbar.scrolled{ box-shadow:var(--shadow-md); }
+  .brand{font-family:'Fraunces',serif; font-weight:600; font-size:19px;}
+  .nav-links{list-style:none; display:flex; gap:2px; margin:0; padding:0;}
+  .nav-links a{ padding:9px 16px; border-radius:999px; font-size:14px; color:var(--muted); transition:background-color .2s ease, color .2s ease; font-family:'Inter',sans-serif; }
+  .nav-links a:hover{ background:var(--surface-2); color:var(--ink); }
+  .navbar-right{display:flex; align-items:center; gap:10px;}
+  .lang-switch{display:flex; gap:2px; background:var(--surface-2); border-radius:999px; padding:3px;}
+  .lang-switch button{background:none;border:0;font:inherit;cursor:pointer;padding:5px 11px;border-radius:999px;font-size:12.5px;color:var(--muted);transition:background-color .2s ease,color .2s ease;}
+  html:not([data-lang="de"]) [data-lang-btn="en"]{background:var(--green);color:var(--bg);}
+  html[data-lang="de"] [data-lang-btn="de"]{background:var(--green);color:var(--bg);}
+  .cta-pill{background:var(--green); color:var(--bg); padding:11px 22px; border-radius:999px; font-size:14px; font-weight:500; white-space:nowrap; transition:transform .25s ease, box-shadow .25s ease, background-color .25s ease; font-family:'Inter',sans-serif;}
+  .cta-pill:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); background:var(--brass); color:var(--green-deep); }
+  .menu-toggle{display:none; position:relative; width:22px; height:16px; padding:0; background:none; border:0; cursor:pointer; color:var(--ink); margin-left:4px;}
+  .menu-toggle span{position:absolute; left:0; width:100%; height:2px; background:currentColor; border-radius:2px; transition:transform .3s ease, opacity .25s ease, top .3s ease;}
+  .menu-toggle span:nth-child(1){top:0;} .menu-toggle span:nth-child(2){top:7px;} .menu-toggle span:nth-child(3){top:14px;}
+  .navbar.nav-open .menu-toggle span:nth-child(1){top:7px;transform:rotate(45deg);}
+  .navbar.nav-open .menu-toggle span:nth-child(2){opacity:0;}
+  .navbar.nav-open .menu-toggle span:nth-child(3){top:7px;transform:rotate(-45deg);}
+  .navbar.nav-open{ border-radius:28px; }
+  .mobile-panel{ display:none; }
+  .navbar.nav-open .mobile-panel{
+    display:flex; flex-direction:column; gap:4px;
+    position:absolute; top:100%; left:0; right:0; margin-top:10px;
+    background:var(--surface); border:1px solid var(--border); border-radius:20px;
+    padding:14px; box-shadow:var(--shadow-lg); animation:panelDrop .25s cubic-bezier(.16,.8,.24,1);
+  }
+  .mobile-panel a{ padding:12px 14px; border-radius:12px; font-size:15px; color:var(--ink); font-family:'Inter',sans-serif; }
+  .mobile-panel a:hover{ background:var(--surface-2); }
+  @keyframes panelDrop{ from{opacity:0; transform:translateY(-8px);} to{opacity:1; transform:translateY(0);} }
+  @media (max-width:860px){ .nav-links, .cta-pill{display:none;} .menu-toggle{display:block;} }
 
-  /* menu */
-  .menu-section{
-    background:var(--green-deep);color:var(--cream);padding:100px 32px;
+  .hero-bento{ padding:56px 0 20px; }
+  .hero-grid{ display:grid; grid-template-columns:1.6fr 1fr; gap:20px; align-items:stretch; }
+  .hero-card{
+    background:var(--green); color:var(--bg); border-radius:28px; padding:56px 48px;
+    display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;
   }
-  .menu-head{max-width:1120px;margin:0 auto 56px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
-  .menu-head h2{font-size:38px;}
-  .menu-head p{color:var(--cream-dim);max-width:34ch;margin:0;}
-  .menu-grid{
-    max-width:1120px;margin:0 auto;
-    display:grid;grid-template-columns:1fr 1fr;gap:56px;
+  .hero-card::after{
+    content:''; position:absolute; inset:0; opacity:0.55; pointer-events:none;
+    background:radial-gradient(circle at 85% 10%, rgba(199,162,82,0.2) 0, transparent 45%),
+               radial-gradient(circle at 5% 95%, rgba(110,43,51,0.22) 0, transparent 40%);
   }
-  .menu-group h3{
-    font-size:14px;text-transform:none;letter-spacing:0.04em;
-    color:var(--brass);font-family:'Inter',sans-serif;font-weight:600;
-    border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:22px;
-  }
-  .dish{display:flex;justify-content:space-between;gap:18px;margin-bottom:20px;}
-  .dish-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;}
-  .dish-desc{font-size:14px;color:var(--cream-dim);margin-top:4px;max-width:38ch;}
-  .dish-price{font-size:15px;color:var(--brass);white-space:nowrap;padding-top:2px;}
+  .kicker-badge{ display:inline-flex; align-items:center; background:rgba(247,245,239,0.1); border:1px solid rgba(247,245,239,0.22); color:var(--brass); font-size:13px; padding:7px 16px; border-radius:999px; margin-bottom:20px; position:relative; width:fit-content; font-family:'Inter',sans-serif; }
+  .hero-card h1{ font-size:clamp(28px,3.4vw,42px); line-height:1.18; max-width:16ch; position:relative; }
+  .hero-card p{ color:#D6CFBB; font-size:16px; max-width:44ch; margin-top:18px; position:relative; font-family:'Inter',sans-serif; }
+  .hero-actions{ display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; position:relative; }
+  .btn{ display:inline-flex; align-items:center; padding:13px 24px; border-radius:999px; font-size:14.5px; font-weight:500; transition:transform .25s ease, box-shadow .25s ease, background-color .25s ease, color .25s ease; font-family:'Inter',sans-serif; }
+  .btn-light{ background:var(--brass); color:var(--green-deep); }
+  .btn-light:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(199,162,82,0.4); }
+  .btn-ghost{ border:1px solid rgba(247,245,239,0.3); color:var(--bg); }
+  .btn-ghost:hover{ background:rgba(247,245,239,0.1); transform:translateY(-2px); }
 
-  /* gallery strip - abstract color blocks instead of stock photography */
-  .strip{display:grid;grid-template-columns:repeat(4,1fr);}
-  .strip div{height:200px;}
-  .swatch-1{background:linear-gradient(135deg,#2c4130,#1a2620);}
-  .swatch-2{background:linear-gradient(135deg,#C7A252,#8f7534);}
-  .swatch-3{background:linear-gradient(135deg,#4b3a2a,#241b12);}
-  .swatch-4{background:linear-gradient(135deg,#E8E0CE,#c9bd9d);}
+  .hero-side{ display:flex; flex-direction:column; gap:14px; }
+  .side-card{ background:var(--surface); border:1px solid var(--border); border-radius:22px; padding:22px 24px; box-shadow:var(--shadow-sm); }
+  .side-card .eyebrow{ font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-bottom:12px; font-family:'Inter',sans-serif; }
+  .teaser-dish{ display:flex; justify-content:space-between; gap:10px; font-size:14px; padding:7px 0; border-bottom:1px dashed var(--border); }
+  .teaser-dish:last-child{ border-bottom:0; }
+  .teaser-dish .name{ font-family:'Fraunces',serif; font-style:italic; font-size:15px; }
+  .teaser-dish .price{ color:var(--brass); font-family:'Inter',sans-serif; font-size:13.5px; white-space:nowrap; }
+  .hours-mini{ display:flex; align-items:center; gap:10px; font-size:14px; padding:6px 0; }
+  .status-dot{ width:8px; height:8px; border-radius:50%; background:var(--olive); flex-shrink:0; }
 
-  /* visit / hours */
-  .visit{
-    padding:100px 32px;display:grid;grid-template-columns:1fr 1fr;gap:64px;
-  }
-  .visit h2{font-size:32px;margin-bottom:24px;}
-  .hours-row{display:flex;justify-content:space-between;max-width:340px;padding:10px 0;border-bottom:1px solid rgba(35,32,27,0.12);font-size:15px;}
-  .addr{margin-top:32px;font-size:15px;color:#5a5346;line-height:1.8;}
-  .map-block{
-    background:var(--cream-dim);border:1px solid rgba(35,32,27,0.12);
-    height:100%;min-height:280px;position:relative;border-radius:2px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .map-block svg{width:70%;opacity:0.5;}
+  .section{ padding:76px 0; }
+  .section-intro{ max-width:620px; margin-bottom:36px; }
+  .section-intro .eyebrow{ font-size:13px; font-weight:600; color:var(--brass); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px; font-family:'Inter',sans-serif; }
+  .section-intro h2{ font-size:clamp(24px,3vw,32px); margin-bottom:12px; }
+  .section-intro p{ color:var(--muted); font-size:15.5px; font-family:'Inter',sans-serif; }
 
-  footer{
-    background:var(--green);color:var(--cream-dim);padding:56px 32px 40px;
-    font-size:14px;
-  }
-  .footer-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-  .footer-inner .brand{color:var(--cream);}
+  .menu-card{ background:var(--surface); border-radius:26px; border:1px solid var(--border); box-shadow:var(--shadow-sm); padding:40px; }
+  .menu-columns{ display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+  .menu-group h3{ font-family:'Inter',sans-serif; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:0.06em; color:var(--brass); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .menu-group:nth-child(2) h3{ color:var(--wine); }
+  .dish{ margin-bottom:20px; transition:padding-left .25s ease; border-radius:8px; }
+  .dish:hover{ padding-left:8px; }
+  .dish-top{ display:flex; align-items:baseline; gap:8px; }
+  .dish-name{ font-family:'Fraunces',serif; font-size:18px; font-style:italic; white-space:nowrap; }
+  .dish-leader{ flex:1; border-bottom:1px dotted var(--border); transform:translateY(-4px); }
+  .dish-price{ font-family:'Inter',sans-serif; font-size:14.5px; color:var(--brass); white-space:nowrap; }
+  .menu-group:nth-child(2) .dish-price{ color:var(--wine); }
+  .dish-desc{ font-size:13.5px; color:var(--muted); margin-top:3px; font-family:'Inter',sans-serif; }
 
-  @media (max-width:840px){
-    .nav ul, .nav-cta{display:none;}
-    .menu-toggle{display:block;}
-    .philosophy, .visit{grid-template-columns:1fr;gap:32px;}
-    .menu-grid{grid-template-columns:1fr;}
-    .strip{grid-template-columns:repeat(2,1fr);}
-    .hero{padding:72px 24px 88px;}
-    .vine{display:none;}
-  }
+  .chip-strip{ display:flex; gap:10px; margin:56px 0; }
+  .chip-strip div{ flex:1; height:64px; border-radius:16px; transition:transform .35s ease; }
+  .chip-strip div:hover{ transform:translateY(-4px); }
 
-  .lang-block[data-block="de"]{display:none;}
-  html[data-lang="de"] .lang-block[data-block="de"]{display:block;}
-  html[data-lang="de"] .lang-block[data-block="en"]{display:none;}
-  .lang-switch button.lang-btn{background:none;border:0;font:inherit;cursor:pointer;padding:2px 3px;}
-  [data-lang-btn="en"]{color:inherit;opacity:0.65;}
-  [data-lang-btn="de"]{color:inherit;opacity:0.65;}
-  html:not([data-lang="de"]) [data-lang-btn="en"]{opacity:1;color:var(--cream);border-bottom:1px solid var(--brass);}
-  html[data-lang="de"] [data-lang-btn="de"]{opacity:1;color:var(--cream);border-bottom:1px solid var(--brass);}
+  .visit-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:22px; }
+  .info-card{ background:var(--surface); border-radius:24px; border:1px solid var(--border); box-shadow:var(--shadow-sm); padding:34px 36px; }
+  .hours-row{ display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--border); font-size:14.5px; }
+  .hours-row:last-child{ border-bottom:0; }
+  .addr{ margin-top:22px; font-size:14.5px; color:var(--muted); line-height:1.8; }
+  .map-card{ background:var(--green); border-radius:24px; padding:24px; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-sm); }
+  .map-card svg{ width:100%; }
+
+  footer{ padding:34px 0 40px; text-align:center; color:var(--muted); font-size:13.5px; font-family:'Inter',sans-serif; }
+
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .8s cubic-bezier(.16,.8,.24,1), transform .8s cubic-bezier(.16,.8,.24,1); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  @keyframes heroRise{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+  .hero-anim{ opacity:0; animation:heroRise .8s cubic-bezier(.16,.8,.24,1) forwards; }
+  .hero-anim-1{animation-delay:.05s;} .hero-anim-2{animation-delay:.18s;} .hero-anim-3{animation-delay:.32s;} .hero-anim-4{animation-delay:.46s;}
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
+
+  .lang-block[data-block="de"]{ display:none; }
+  html[data-lang="de"] .lang-block[data-block="de"]{ display:block; }
+  html[data-lang="de"] .lang-block[data-block="en"]{ display:none; }
+
+  @media (min-width:641px) and (max-width:1024px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-side{ flex-direction:row; }
+  }
+  @media (max-width:640px){
+    .hero-card{ padding:36px 26px; border-radius:22px; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-side{ flex-direction:column; }
+    .menu-columns{ grid-template-columns:1fr; gap:30px; }
+    .visit-grid{ grid-template-columns:1fr; }
+    .menu-card, .info-card{ padding:26px 22px; border-radius:20px; }
+    .section{ padding:52px 0; }
+    .navbar-wrap{ padding:14px 14px 0; }
+    .chip-strip{ flex-wrap:wrap; }
+    .chip-strip div{ flex:1 1 40%; }
+  }
 </style>
 </head>
 <body>
+
 <div class="lang-block" data-block="en">
 
-<header>
-  <nav class="nav">
+<div class="navbar-wrap">
+  <header class="navbar">
     <div class="brand">Ember &amp; Oak</div>
-    <ul>
+    <ul class="nav-links">
       <li><a href="#en-menu">Menu</a></li>
       <li><a href="#en-visit">Hours &amp; location</a></li>
       <li><a href="#en-about">About</a></li>
     </ul>
-    <div class="header-right">
-      <a class="nav-cta" href="#en-visit">Reserve a table</a>
-      <div class="lang-switch"><button type="button" class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button><button type="button" class="lang-btn" data-lang-btn="de" onclick="setLang('de')">DE</button></div>
-      <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+    <div class="navbar-right">
+      <div class="lang-switch"><button type="button" data-lang-btn="en" onclick="setLang('en')">EN</button><button type="button" data-lang-btn="de" onclick="setLang('de')">DE</button></div>
+      <a class="cta-pill" href="#en-visit">Reserve a table</a>
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false" type="button"><span></span><span></span><span></span></button>
     </div>
-  </nav>
-</header>
+    <div class="mobile-panel">
+      <a href="#en-menu">Menu</a>
+      <a href="#en-visit">Hours &amp; location</a>
+      <a href="#en-about">About</a>
+    </div>
+  </header>
+</div>
 
-<section class="hero">
-  <div class="hero-grain"></div>
-  <div class="hero-inner">
-    <div class="kicker">A wine bar and kitchen on Aldergate Row</div>
-    <h1>Good wine, cooked-down food, and a table that isn't rushing you.</h1>
-    <p>Ember &amp; Oak seats thirty-two. We change the board with the season and keep a running list of small producers worth knowing. No tasting menu, no dress code — just a kitchen that cares and a cellar we're proud of.</p>
-    <div class="hero-actions">
-      <a class="btn btn-brass" href="#en-visit">Reserve a table</a>
-      <a class="btn btn-outline" href="#en-menu">See tonight's menu</a>
+<section class="hero-bento container">
+  <div class="hero-grid">
+    <div class="hero-card">
+      <div class="kicker-badge hero-anim hero-anim-1">A wine bar and kitchen on Aldergate Row</div>
+      <h1 class="hero-anim hero-anim-2">Good wine, cooked-down food, and a table that isn't rushing you.</h1>
+      <p class="hero-anim hero-anim-3">Ember &amp; Oak seats thirty-two. We change the board with the season and keep a running list of small producers worth knowing. No tasting menu, no dress code — just a kitchen that cares and a cellar we're proud of.</p>
+      <div class="hero-actions hero-anim hero-anim-4">
+        <a class="btn btn-light" href="#en-visit">Reserve a table</a>
+        <a class="btn btn-ghost" href="#en-menu">See tonight's menu</a>
+      </div>
+    </div>
+    <div class="hero-side hero-anim hero-anim-4">
+      <div class="side-card">
+        <div class="eyebrow">From tonight's board</div>
+        <div class="teaser-dish"><span class="name">Charred leeks, hazelnut</span><span class="price">$14</span></div>
+        <div class="teaser-dish"><span class="name">Half chicken, jus</span><span class="price">$29</span></div>
+        <div class="teaser-dish"><span class="name">Wild mushroom risotto</span><span class="price">$24</span></div>
+      </div>
+      <div class="side-card">
+        <div class="eyebrow">Open today</div>
+        <div class="hours-mini"><span class="status-dot"></span> 5:30pm – 10pm · walk-ins welcome</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="philosophy" id="en-about">
-  <h2>We cook like the season decides, not the calendar.</h2>
-  <div>
-    <p class="lede">Ember &amp; Oak opened in 2019 in a converted hardware store on Aldergate Row. The oven is wood-fired, the wine list is short on purpose, and most of what lands on the board came from a grower within eighty miles.</p>
-    <p>Chef Marion Duclos trained in Lyon before coming home to run a kitchen her own way: fewer plates, more attention to each one. The wine list is curated with the same restraint — thirty-odd bottles, rotating constantly, chosen by people who've actually visited the vineyards.</p>
+<section class="section container" id="en-about">
+  <div class="section-intro reveal">
+    <div class="eyebrow">Our approach</div>
+    <h2>We cook like the season decides, not the calendar.</h2>
+    <p>Ember &amp; Oak opened in 2019 in a converted hardware store on Aldergate Row. The oven is wood-fired, the wine list is short on purpose, and most of what lands on the board came from a grower within eighty miles. Chef Marion Duclos trained in Lyon before coming home to run a kitchen her own way: fewer plates, more attention to each one.</p>
   </div>
 </section>
 
-<section class="menu-section" id="en-menu">
-  <div class="menu-head">
-    <h2>Tonight's board</h2>
+<section class="section container" id="en-menu">
+  <div class="section-intro reveal">
+    <div class="eyebrow">Tonight's board</div>
+    <h2>What's on the menu</h2>
     <p>Updated daily. Ask your server about the reserve list — it doesn't make it onto paper.</p>
   </div>
-  <div class="menu-grid">
-    <div class="menu-group">
-      <h3>To start</h3>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Charred leeks, hazelnut, brown butter</div>
+  <div class="menu-card reveal">
+    <div class="menu-columns">
+      <div class="menu-group">
+        <h3>To start</h3>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Charred leeks, hazelnut, brown butter</span><span class="dish-leader"></span><span class="dish-price">$14</span></div>
           <div class="dish-desc">Whole leeks over the wood fire, finished at the pass</div>
         </div>
-        <div class="dish-price">$14</div>
-      </div>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Beef tartare, rye crisp, egg yolk</div>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Beef tartare, rye crisp, egg yolk</span><span class="dish-leader"></span><span class="dish-price">$18</span></div>
           <div class="dish-desc">Hand-cut, dressed with capers and shallot</div>
         </div>
-        <div class="dish-price">$18</div>
-      </div>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Burrata, roasted grapes, thyme oil</div>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Burrata, roasted grapes, thyme oil</span><span class="dish-leader"></span><span class="dish-price">$16</span></div>
         </div>
-        <div class="dish-price">$16</div>
       </div>
-    </div>
-    <div class="menu-group">
-      <h3>Mains</h3>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Half chicken, jus, market greens</div>
+      <div class="menu-group">
+        <h3>Mains</h3>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Half chicken, jus, market greens</span><span class="dish-leader"></span><span class="dish-price">$29</span></div>
           <div class="dish-desc">Brined 24 hours, roasted over oak</div>
         </div>
-        <div class="dish-price">$29</div>
-      </div>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Hanger steak, bordelaise, potato gratin</div>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Hanger steak, bordelaise, potato gratin</span><span class="dish-leader"></span><span class="dish-price">$36</span></div>
         </div>
-        <div class="dish-price">$36</div>
-      </div>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Wild mushroom risotto, aged parmesan</div>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Wild mushroom risotto, aged parmesan</span><span class="dish-leader"></span><span class="dish-price">$24</span></div>
           <div class="dish-desc">Vegetarian; ask about a vegan version</div>
         </div>
-        <div class="dish-price">$24</div>
       </div>
     </div>
   </div>
+
+  <div class="chip-strip reveal" aria-hidden="true">
+    <div style="background:linear-gradient(135deg,#2c4130,#1a2620);"></div>
+    <div style="background:linear-gradient(135deg,#C7A252,#8f7534);"></div>
+    <div style="background:linear-gradient(135deg,#6E2B33,#421920);"></div>
+    <div style="background:linear-gradient(135deg,#6B6B3A,#454524);"></div>
+  </div>
 </section>
 
-<div class="strip" aria-hidden="true">
-  <div class="swatch-1"></div>
-  <div class="swatch-2"></div>
-  <div class="swatch-3"></div>
-  <div class="swatch-4"></div>
-</div>
-
-<section class="visit" id="en-visit">
-  <div>
+<section class="section container" id="en-visit">
+  <div class="section-intro reveal">
+    <div class="eyebrow">Plan a visit</div>
     <h2>Hours &amp; reservations</h2>
-    <div class="hours-row"><span>Tuesday – Thursday</span><span>5:30pm – 10pm</span></div>
-    <div class="hours-row"><span>Friday – Saturday</span><span>5:30pm – 11pm</span></div>
-    <div class="hours-row"><span>Sunday</span><span>5pm – 9pm</span></div>
-    <div class="hours-row"><span>Monday</span><span>Closed</span></div>
-    <div class="addr">
-      142 Aldergate Row<br>
-      Fernbrook<br>
-      (208) 555-0148<br>
-      Walk-ins welcome at the bar. Tables of 5 or more, call ahead.
-    </div>
-    <div class="hero-actions" style="margin-top:32px;">
-      <a class="btn" style="background:var(--green);color:var(--cream);" href="tel:2085550148">Call to reserve</a>
-    </div>
   </div>
-  <div class="map-block">
-    <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="4" width="192" height="132" fill="none" stroke="#23201B" stroke-width="1.5"/>
-      <line x1="4" y1="70" x2="196" y2="70" stroke="#23201B" stroke-width="1.5"/>
-      <line x1="100" y1="4" x2="100" y2="136" stroke="#23201B" stroke-width="1"/>
-      <circle cx="100" cy="70" r="6" fill="#C7A252"/>
-      <text x="108" y="66" font-family="Inter" font-size="9" fill="#23201B">Aldergate Row</text>
-    </svg>
+  <div class="visit-grid">
+    <div class="info-card reveal">
+      <div class="hours-row"><span>Tuesday – Thursday</span><span>5:30pm – 10pm</span></div>
+      <div class="hours-row"><span>Friday – Saturday</span><span>5:30pm – 11pm</span></div>
+      <div class="hours-row"><span>Sunday</span><span>5pm – 9pm</span></div>
+      <div class="hours-row"><span>Monday</span><span>Closed</span></div>
+      <div class="addr">
+        142 Aldergate Row, Fernbrook<br>
+        (208) 555-0148<br>
+        Walk-ins welcome at the bar. Tables of 5 or more, call ahead.
+      </div>
+      <div class="hero-actions" style="margin-top:24px;">
+        <a class="btn" style="background:var(--green); color:var(--bg);" href="tel:2085550148">Call to reserve</a>
+      </div>
+    </div>
+    <div class="map-card reveal">
+      <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="192" height="132" fill="none" stroke="#F4EFE4" stroke-width="1.5" opacity="0.5"/>
+        <line x1="4" y1="70" x2="196" y2="70" stroke="#F4EFE4" stroke-width="1" opacity="0.35"/>
+        <line x1="100" y1="4" x2="100" y2="136" stroke="#F4EFE4" stroke-width="1" opacity="0.35"/>
+        <circle cx="100" cy="70" r="7" fill="#C7A252"/>
+        <text x="60" y="100" font-family="Inter" font-size="10" fill="#F4EFE4">Aldergate Row</text>
+      </svg>
+    </div>
   </div>
 </section>
 
-<footer>
-  <div class="footer-inner">
-    <div class="brand">Ember &amp; Oak</div>
-    <div>&copy; 2026 Ember &amp; Oak Wine Bar &amp; Kitchen. Fernbrook.</div>
-  </div>
-</footer>
+<footer class="container">&copy; 2026 Ember &amp; Oak Wine Bar &amp; Kitchen — Fernbrook</footer>
 
 </div>
+
 <div class="lang-block" data-block="de">
 
-<header>
-  <nav class="nav">
+<div class="navbar-wrap">
+  <header class="navbar">
     <div class="brand">Ember &amp; Oak</div>
-    <ul>
+    <ul class="nav-links">
       <li><a href="#de-menu">Speisekarte</a></li>
       <li><a href="#de-visit">Öffnungszeiten &amp; Lage</a></li>
       <li><a href="#de-about">Über uns</a></li>
     </ul>
-    <div class="header-right">
-      <a class="nav-cta" href="#de-visit">Tisch reservieren</a>
-      <div class="lang-switch"><button type="button" class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button><button type="button" class="lang-btn" data-lang-btn="de" onclick="setLang('de')">DE</button></div>
-      <button class="menu-toggle" aria-label="Menü">&#9776;</button>
+    <div class="navbar-right">
+      <div class="lang-switch"><button type="button" data-lang-btn="en" onclick="setLang('en')">EN</button><button type="button" data-lang-btn="de" onclick="setLang('de')">DE</button></div>
+      <a class="cta-pill" href="#de-visit">Tisch reservieren</a>
+      <button class="menu-toggle" aria-label="Menü" aria-expanded="false" type="button"><span></span><span></span><span></span></button>
     </div>
-  </nav>
-</header>
-
-<section class="hero">
-  <div class="hero-grain"></div>
-  <div class="hero-inner">
-    <div class="kicker">Eine Weinbar und Küche in der Aldergate Row</div>
-    <h1>Guter Wein, langsam gegartes Essen und ein Tisch, an dem niemand drängt.</h1>
-    <p>Ember &amp; Oak hat zweiunddreißig Plätze. Wir ändern die Karte mit der Saison und führen eine laufende Liste kleiner Erzeuger, die es wert sind, gekannt zu werden. Kein Degustationsmenü, kein Dresscode — nur eine Küche, der es wichtig ist, und ein Keller, auf den wir stolz sind.</p>
-    <div class="hero-actions">
-      <a class="btn btn-brass" href="#de-visit">Tisch reservieren</a>
-      <a class="btn btn-outline" href="#de-menu">Heutige Karte ansehen</a>
+    <div class="mobile-panel">
+      <a href="#de-menu">Speisekarte</a>
+      <a href="#de-visit">Öffnungszeiten &amp; Lage</a>
+      <a href="#de-about">Über uns</a>
     </div>
-  </div>
-</section>
-
-<section class="philosophy" id="de-about">
-  <h2>Wir kochen, wie es die Saison bestimmt — nicht der Kalender.</h2>
-  <div>
-    <p class="lede">Ember &amp; Oak eröffnete 2019 in einem umgebauten Eisenwarenladen an der Aldergate Row. Der Ofen wird mit Holz befeuert, die Weinkarte ist bewusst kurz gehalten, und das meiste, was auf der Karte landet, stammt von einem Erzeuger im Umkreis von hundertdreißig Kilometern.</p>
-    <p>Küchenchefin Marion Duclos hat in Lyon gelernt, bevor sie zurückkam, um eine Küche auf ihre eigene Art zu führen: weniger Gerichte, mehr Aufmerksamkeit für jedes einzelne. Die Weinkarte wird mit derselben Zurückhaltung kuratiert — gut dreißig Flaschen, ständig wechselnd, ausgewählt von Menschen, die die Weingüter tatsächlich besucht haben.</p>
-  </div>
-</section>
-
-<section class="menu-section" id="de-menu">
-  <div class="menu-head">
-    <h2>Die heutige Karte</h2>
-    <p>Täglich aktualisiert. Fragen Sie Ihre Bedienung nach der Reserveliste — sie steht nicht auf dem Papier.</p>
-  </div>
-  <div class="menu-grid">
-    <div class="menu-group">
-      <h3>Zum Beginn</h3>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Geröstete Lauchstangen, Haselnuss, brauner Butter</div>
-          <div class="dish-desc">Ganze Lauchstangen über dem Holzfeuer, am Pass fertiggestellt</div>
-        </div>
-        <div class="dish-price">14 €</div>
-      </div>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Rindertatar, Roggencracker, Eigelb</div>
-          <div class="dish-desc">Von Hand geschnitten, mit Kapern und Schalotte angemacht</div>
-        </div>
-        <div class="dish-price">18 €</div>
-      </div>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Burrata, geröstete Trauben, Thymianöl</div>
-        </div>
-        <div class="dish-price">16 €</div>
-      </div>
-    </div>
-    <div class="menu-group">
-      <h3>Hauptgerichte</h3>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Halbes Hähnchen, Jus, Marktgemüse</div>
-          <div class="dish-desc">24 Stunden gebeizt, über Eiche geröstet</div>
-        </div>
-        <div class="dish-price">29 €</div>
-      </div>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Bavette-Steak, Bordelaise, Kartoffelgratin</div>
-        </div>
-        <div class="dish-price">36 €</div>
-      </div>
-      <div class="dish">
-        <div>
-          <div class="dish-name">Risotto mit Wildpilzen, gereiftem Parmesan</div>
-          <div class="dish-desc">Vegetarisch; nach veganer Variante fragen</div>
-        </div>
-        <div class="dish-price">24 €</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="strip" aria-hidden="true">
-  <div class="swatch-1"></div>
-  <div class="swatch-2"></div>
-  <div class="swatch-3"></div>
-  <div class="swatch-4"></div>
+  </header>
 </div>
 
-<section class="visit" id="de-visit">
-  <div>
-    <h2>Öffnungszeiten &amp; Reservierung</h2>
-    <div class="hours-row"><span>Dienstag – Donnerstag</span><span>17:30 – 22:00 Uhr</span></div>
-    <div class="hours-row"><span>Freitag – Samstag</span><span>17:30 – 23:00 Uhr</span></div>
-    <div class="hours-row"><span>Sonntag</span><span>17:00 – 21:00 Uhr</span></div>
-    <div class="hours-row"><span>Montag</span><span>Geschlossen</span></div>
-    <div class="addr">
-      Aldergate Row 142<br>
-      Fernbrook<br>
-      (208) 555-0148<br>
-      Ohne Reservierung an der Bar willkommen. Für Gruppen ab 5 Personen bitte vorher anrufen.
+<section class="hero-bento container">
+  <div class="hero-grid">
+    <div class="hero-card">
+      <div class="kicker-badge hero-anim hero-anim-1">Eine Weinbar und Küche in der Aldergate Row</div>
+      <h1 class="hero-anim hero-anim-2">Guter Wein, langsam gegartes Essen und ein Tisch, an dem niemand drängt.</h1>
+      <p class="hero-anim hero-anim-3">Ember &amp; Oak hat zweiunddreißig Plätze. Wir ändern die Karte mit der Saison und führen eine laufende Liste kleiner Erzeuger, die es wert sind, gekannt zu werden. Kein Degustationsmenü, kein Dresscode — nur eine Küche, der es wichtig ist, und ein Keller, auf den wir stolz sind.</p>
+      <div class="hero-actions hero-anim hero-anim-4">
+        <a class="btn btn-light" href="#de-visit">Tisch reservieren</a>
+        <a class="btn btn-ghost" href="#de-menu">Heutige Karte ansehen</a>
+      </div>
     </div>
-    <div class="hero-actions" style="margin-top:32px;">
-      <a class="btn" style="background:var(--green);color:var(--cream);" href="tel:2085550148">Zum Reservieren anrufen</a>
+    <div class="hero-side hero-anim hero-anim-4">
+      <div class="side-card">
+        <div class="eyebrow">Von der heutigen Karte</div>
+        <div class="teaser-dish"><span class="name">Geröstete Lauchstangen</span><span class="price">14 €</span></div>
+        <div class="teaser-dish"><span class="name">Halbes Hähnchen, Jus</span><span class="price">29 €</span></div>
+        <div class="teaser-dish"><span class="name">Risotto mit Wildpilzen</span><span class="price">24 €</span></div>
+      </div>
+      <div class="side-card">
+        <div class="eyebrow">Heute geöffnet</div>
+        <div class="hours-mini"><span class="status-dot"></span> 17:30 – 22:00 Uhr · ohne Reservierung willkommen</div>
+      </div>
     </div>
-  </div>
-  <div class="map-block">
-    <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="4" width="192" height="132" fill="none" stroke="#23201B" stroke-width="1.5"/>
-      <line x1="4" y1="70" x2="196" y2="70" stroke="#23201B" stroke-width="1.5"/>
-      <line x1="100" y1="4" x2="100" y2="136" stroke="#23201B" stroke-width="1"/>
-      <circle cx="100" cy="70" r="6" fill="#C7A252"/>
-      <text x="108" y="66" font-family="Inter" font-size="9" fill="#23201B">Aldergate Row</text>
-    </svg>
   </div>
 </section>
 
-<footer>
-  <div class="footer-inner">
-    <div class="brand">Ember &amp; Oak</div>
-    <div>&copy; 2026 Ember &amp; Oak Weinbar &amp; Küche. Fernbrook.</div>
+<section class="section container" id="de-about">
+  <div class="section-intro reveal">
+    <div class="eyebrow">Unsere Haltung</div>
+    <h2>Wir kochen, wie es die Saison bestimmt — nicht der Kalender.</h2>
+    <p>Ember &amp; Oak eröffnete 2019 in einem umgebauten Eisenwarenladen an der Aldergate Row. Der Ofen wird mit Holz befeuert, die Weinkarte ist bewusst kurz gehalten, und das meiste, was auf der Karte landet, stammt von einem Erzeuger im Umkreis von hundertdreißig Kilometern. Küchenchefin Marion Duclos hat in Lyon gelernt, bevor sie zurückkam, um eine Küche auf ihre eigene Art zu führen: weniger Gerichte, mehr Aufmerksamkeit für jedes einzelne.</p>
   </div>
-</footer>
+</section>
+
+<section class="section container" id="de-menu">
+  <div class="section-intro reveal">
+    <div class="eyebrow">Die heutige Karte</div>
+    <h2>Was heute auf der Karte steht</h2>
+    <p>Täglich aktualisiert. Fragen Sie Ihre Bedienung nach der Reserveliste — sie steht nicht auf dem Papier.</p>
+  </div>
+  <div class="menu-card reveal">
+    <div class="menu-columns">
+      <div class="menu-group">
+        <h3>Zum Beginn</h3>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Geröstete Lauchstangen, Haselnuss</span><span class="dish-leader"></span><span class="dish-price">14 €</span></div>
+          <div class="dish-desc">Ganze Lauchstangen über dem Holzfeuer, am Pass fertiggestellt</div>
+        </div>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Rindertatar, Roggencracker, Eigelb</span><span class="dish-leader"></span><span class="dish-price">18 €</span></div>
+          <div class="dish-desc">Von Hand geschnitten, mit Kapern und Schalotte angemacht</div>
+        </div>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Burrata, geröstete Trauben, Thymianöl</span><span class="dish-leader"></span><span class="dish-price">16 €</span></div>
+        </div>
+      </div>
+      <div class="menu-group">
+        <h3>Hauptgerichte</h3>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Halbes Hähnchen, Jus, Marktgemüse</span><span class="dish-leader"></span><span class="dish-price">29 €</span></div>
+          <div class="dish-desc">24 Stunden gebeizt, über Eiche geröstet</div>
+        </div>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Bavette-Steak, Bordelaise, Kartoffelgratin</span><span class="dish-leader"></span><span class="dish-price">36 €</span></div>
+        </div>
+        <div class="dish">
+          <div class="dish-top"><span class="dish-name">Risotto mit Wildpilzen, Parmesan</span><span class="dish-leader"></span><span class="dish-price">24 €</span></div>
+          <div class="dish-desc">Vegetarisch; nach veganer Variante fragen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chip-strip reveal" aria-hidden="true">
+    <div style="background:linear-gradient(135deg,#2c4130,#1a2620);"></div>
+    <div style="background:linear-gradient(135deg,#C7A252,#8f7534);"></div>
+    <div style="background:linear-gradient(135deg,#6E2B33,#421920);"></div>
+    <div style="background:linear-gradient(135deg,#6B6B3A,#454524);"></div>
+  </div>
+</section>
+
+<section class="section container" id="de-visit">
+  <div class="section-intro reveal">
+    <div class="eyebrow">Besuch planen</div>
+    <h2>Öffnungszeiten &amp; Reservierung</h2>
+  </div>
+  <div class="visit-grid">
+    <div class="info-card reveal">
+      <div class="hours-row"><span>Dienstag – Donnerstag</span><span>17:30 – 22:00 Uhr</span></div>
+      <div class="hours-row"><span>Freitag – Samstag</span><span>17:30 – 23:00 Uhr</span></div>
+      <div class="hours-row"><span>Sonntag</span><span>17:00 – 21:00 Uhr</span></div>
+      <div class="hours-row"><span>Montag</span><span>Geschlossen</span></div>
+      <div class="addr">
+        Aldergate Row 142, Fernbrook<br>
+        (208) 555-0148<br>
+        Ohne Reservierung an der Bar willkommen. Für Gruppen ab 5 Personen bitte vorher anrufen.
+      </div>
+      <div class="hero-actions" style="margin-top:24px;">
+        <a class="btn" style="background:var(--green); color:var(--bg);" href="tel:2085550148">Zum Reservieren anrufen</a>
+      </div>
+    </div>
+    <div class="map-card reveal">
+      <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="192" height="132" fill="none" stroke="#F4EFE4" stroke-width="1.5" opacity="0.5"/>
+        <line x1="4" y1="70" x2="196" y2="70" stroke="#F4EFE4" stroke-width="1" opacity="0.35"/>
+        <line x1="100" y1="4" x2="100" y2="136" stroke="#F4EFE4" stroke-width="1" opacity="0.35"/>
+        <circle cx="100" cy="70" r="7" fill="#C7A252"/>
+        <text x="60" y="100" font-family="Inter" font-size="10" fill="#F4EFE4">Aldergate Row</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<footer class="container">&copy; 2026 Ember &amp; Oak Weinbar &amp; Küche — Fernbrook</footer>
 
 </div>
 
 <script>
-  var pageTitles = { en: 'Ember &amp; Oak — Wine Bar &amp; Kitchen, Fernbrook', de: 'Ember &amp; Oak — Weinbar &amp; Küche, Fernbrook' };
-  function setLang(l){
+  var pageTitles = { en: 'Ember & Oak — Wine Bar & Kitchen, Fernbrook', de: 'Ember & Oak — Weinbar & Küche, Fernbrook' };
+  function applyLang(l){
     document.documentElement.setAttribute('data-lang', l);
     document.title = pageTitles[l];
     try{ localStorage.setItem('site-lang', l); }catch(e){}
   }
+  function setLang(l){
+    if(document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      document.startViewTransition(function(){ applyLang(l); });
+    } else { applyLang(l); }
+  }
   document.title = pageTitles[document.documentElement.getAttribute('data-lang') || 'en'];
+</script>
+<script>
+(function(){
+  var navbars = document.querySelectorAll('.navbar');
+  function onScroll(){ var y = window.scrollY||0; navbars.forEach(function(n){ n.classList.toggle('scrolled', y>8); }); }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  document.querySelectorAll('.menu-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var nav = btn.closest('.navbar');
+      if(!nav) return;
+      var open = nav.classList.toggle('nav-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+  document.querySelectorAll('.navbar').forEach(function(nav){
+    nav.querySelectorAll('.mobile-panel a').forEach(function(link){
+      link.addEventListener('click', function(){ nav.classList.remove('nav-open'); });
+    });
+  });
+  document.addEventListener('click', function(e){
+    document.querySelectorAll('.navbar.nav-open').forEach(function(nav){
+      if(!nav.contains(e.target)){ nav.classList.remove('nav-open'); }
+    });
+  });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+  if(reduceMotion || !('IntersectionObserver' in window)){
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold:0.12, rootMargin:'0px 0px -40px 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+})();
 </script>
 
 </body>
